@@ -5,6 +5,39 @@
   --foreground: #171717;
 }
 
+/* Custom colors and fonts */
+:root {
+  --primary: #A576FF;
+  --secondary: #dcd5ff;
+  --dark-secondary: #8974eb66;
+  --dark-primary: #8974eb00;
+  --black: #000000;
+  --dark-black: #191919;
+  --light-black: #333333;
+  --white: #ffffff;
+  --neutral-50: #fafafa;
+  --neutral-light: #e6e6e6;
+
+  --site-header-height: 0px; /* updated by Header component */
+}
+@theme inline {
+  --color-primary: #A576FF;
+  --color-secondary: #dcd5ff;
+  --color-dark-secondary: #8974eb66;
+  --color-dark-primary: #8974eb00;
+  --color-black: #000000;
+  --color-dark-black: #191919;
+  --color-light-black: #333333;
+  --color-white: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-light: #e6e6e6;
+}
+
+/* ensure page content starts after fixed header */
+body {
+  padding-top: var(--site-header-height);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -14,7 +47,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #ffffff;
     --foreground: #ededed;
   }
 }
