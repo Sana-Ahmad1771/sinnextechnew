@@ -99,7 +99,7 @@ const Preloader = () => {
                     priority // Critical for preloader performance
                     className="object-contain"
                   />
-                  <motion.h2 className="text-3xl text-white font-serif font-semibold tracking-wide">
+                  <motion.h2 className="text-3xl text-white font-monosans font-semibold tracking-wide">
                     SinnexTech
                   </motion.h2>
                 </div>

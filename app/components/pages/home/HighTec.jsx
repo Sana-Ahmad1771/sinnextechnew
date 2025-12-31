@@ -106,17 +106,13 @@ const HighTec = () => {
         ref={containerRef}
         className="bg-[#f4f4f4] py-32 px-6 md:px-12 lg:px-20"
       >
-        <div className="max-w-[1500px] mx-auto  border-t border-black/7 grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Label */}
-          <div className="lg:col-span-4  pt-4">
+        <div className="max-w-[1500px] mx-auto border-t border-black/7">
+          {/* Centered Heading & Description */}
+          <div className="pt-4 flex flex-col justify-center items-center text-center">
             <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
               <span className="text-sm">✱</span> INNOVATION
             </p>
-          </div>
-
-          {/* Right Heading & Description */}
-          <div className="lg:col-span-8 pt-4 flex flex-col">
-            <h2 className="text-[9vw] md:text-[5rem] leading-[1.1] uppercase text-black font-['Mona_Sans_Narrow',_Impact,_sans-serif] mb-12">
+            <h2 className="flex flex-col items-center justify-center text-center text-[9vw] md:text-[5rem] leading-[1.1] uppercase text-black font-['Mona_Sans_Narrow',_Impact,_sans-serif] mb-12">
               <ParallaxSplitText
                 className="tracking-wide"
                 text="Transforming"
@@ -125,13 +121,10 @@ const HighTec = () => {
                 className="tracking-wide"
                 text="healthcare through"
               />
-
-              <div className="flex items-center gap-6 flex-wrap mt-2">
-                <ParallaxSplitText
-                  className="opacity-20 tracking-wide"
-                  text="technology and innovation"
-                />
-              </div>
+              <ParallaxSplitText
+                className="opacity-20 tracking-wide mt-2"
+                text="technology and innovation"
+              />
             </h2>
 
             <div className="max-w-2xl mb-12">
@@ -142,8 +135,8 @@ const HighTec = () => {
             </div>
           </div>
 
-          {/* Video Section */}
-          <div className="col-span-12 flex justify-center">
+          {/* Video Section - Centered */}
+          <div className="flex justify-center">
             <motion.div
               style={{ scale, width, height, opacity }}
               className="relative cursor-pointer group overflow-hidden rounded-2xl shadow-2xl w-full max-w-[1500px]"
@@ -204,7 +197,7 @@ const HighTec = () => {
                 />
               </motion.div>
             </motion.div>
-          )}{" "}
+          )}
         </AnimatePresence>
       </section>
     </>

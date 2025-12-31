@@ -119,7 +119,7 @@ const AboutSection = () => {
           <div className="mt-16 flex flex-wrap items-center gap-8">
             <a
               href="/about"
-              className="group relative flex items-center gap-6 bg-primary text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
+              className="group relative flex items-center gap-3 bg-primary text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
             >
               <span className="relative z-10">Our story</span>
               <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">

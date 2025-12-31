@@ -9,6 +9,8 @@ import HeroFive from "./components/pages/home/HeroFive.jsx";
 import HeroLayout from "./components/pages/home/HeroLayout.jsx";
 import HighTec from "./components/pages/home/HighTec.jsx";
 import AboutSection from "./components/pages/home/AboutSection.jsx";
+import Realizations from "./components/pages/home/Realizations.jsx";
+import Services from "./components/pages/home/Services.jsx";
 
 export default function Home() {
   return (
@@ -19,6 +21,8 @@ export default function Home() {
       {/* <Herotwo /> */}
       <ClientScroll />
       <AboutSection />
+      <Services />
+      {/* <Realizations /> */}
       <HighTec />
       {/* <TechHealthcare /> */}
       {/* <HeroFive />
