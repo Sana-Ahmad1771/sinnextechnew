@@ -7,7 +7,7 @@
 
 /* Custom colors and fonts */
 :root {
-  --primary: #A576FF;
+  --primary: #a576ff;
   --secondary: #dcd5ff;
   --dark-secondary: #8974eb66;
   --dark-primary: #8974eb00;
@@ -17,11 +17,13 @@
   --white: #ffffff;
   --neutral-50: #fafafa;
   --neutral-light: #e6e6e6;
-
+ --font-monosansnarrow: "MonaSansNarrow", serif;
+  --font-mononarrowbold: "MonaSansNarrowBold", Impact, serif;
+  
   --site-header-height: 0px; /* updated by Header component */
 }
 @theme inline {
-  --color-primary: #A576FF;
+  --color-primary: #a576ff;
   --color-secondary: #dcd5ff;
   --color-dark-secondary: #8974eb66;
   --color-dark-primary: #8974eb00;
@@ -31,6 +33,12 @@
   --color-white: #ffffff;
   --color-neutral-50: #fafafa;
   --color-neutral-light: #e6e6e6;
+
+  /* fonts */
+  --font-monosansnarrow: "MonaSansNarrow", serif;
+  --font-mononarrowbold: "MonaSansNarrowBold", serif;
+  --font-monosans: "Mona Sans", Arial, sans-serif;
+  --font-monosansregular: "monosansregular", Arial, sans-serif;
 }
 
 /* ensure page content starts after fixed header */
@@ -43,6 +51,30 @@ body {
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+@font-face {
+  font-family: "MonaSansNarrow";
+  src: url("/fonts/Mona-Sans-BlackNarrow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MonaSansNarrowBold";
+  src: url("/fonts/Mona-Sans-BoldNarrow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "monosans";
+  src: url("/fonts/Mona-Sans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "monosansregular";
+  src: url("/fonts/Mona-Sans-RegularNarrow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -1,46 +1,53 @@
 "use client";
+
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { IoLogoInstagram } from "react-icons/io";
 import { RiLinkedinFill } from "react-icons/ri";
 
 const TRAIL_IMAGES = [
-  "images/project.png",
-  "images/project2.png",
-  "images/hero-1.jpg",
+  "images/project.jpg",
+  "images/project2.jpg",
   "images/hero-2.jpg",
-  "images/hero-3.jpg",
   "images/hero-4.jpg",
-  "images/african.png",
-  "images/bag-mn.png",
-  "images/female-green.png",
+  "images/african.jpg",
+  "images/bag-mn.jpg",
+  "images/female-green.jpg",
 ];
 
 const Hero = () => {
   const [images, setImages] = useState([]);
   const lastMousePos = useRef({ x: 0, y: 0 });
   const imageCount = useRef(0);
+  const sectionRef = useRef(null); // Reference to the Hero section
 
-  // --- Image Trail Logic ---
   const handleMouseMove = (e) => {
-    const { clientX, clientY } = e;
+    if (!sectionRef.current) return;
+
+    // Get mouse position relative to the Hero section container
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
     const distance = Math.hypot(
-      clientX - lastMousePos.current.x,
-      clientY - lastMousePos.current.y
+      x - lastMousePos.current.x,
+      y - lastMousePos.current.y
     );
 
+    // Only drop image if moved enough distance
     if (distance > 90) {
-      lastMousePos.current = { x: clientX, y: clientY };
+      lastMousePos.current = { x, y };
       const id = Date.now();
       const imgIndex = imageCount.current % TRAIL_IMAGES.length;
       imageCount.current++;
 
       const newImage = {
         id,
-        x: clientX,
-        y: clientY,
+        x,
+        y,
         url: TRAIL_IMAGES[imgIndex],
       };
+
       setImages((prev) => [...prev, newImage]);
       setTimeout(() => {
         setImages((prev) => prev.filter((img) => img.id !== id));
@@ -48,7 +55,6 @@ const Hero = () => {
     }
   };
 
-  // --- Icon Animation Variants ---
   const iconSlideVariants = {
     initial: { y: 0, rotateX: 0 },
     hover: { y: "-120%", rotateX: 45 },
@@ -60,11 +66,12 @@ const Hero = () => {
 
   return (
     <section
+      ref={sectionRef} // Attach ref here
       onMouseMove={handleMouseMove}
       className="relative h-screen w-full bg-[#080808] overflow-hidden flex flex-col items-center justify-center cursor-default"
     >
-      {/* --- 1. Image Trail Overlay --- */}
-      <div className="fixed inset-0 pointer-events-none z-20">
+      {/* --- 1. Image Trail Overlay (Changed from fixed to absolute) --- */}
+      <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
         <AnimatePresence>
           {images.map((img) => (
             <motion.img
@@ -82,20 +89,17 @@ const Hero = () => {
               style={{
                 left: img.x,
                 top: img.y,
-                transform: "translate(-50%, -50%)",
+                // Ensures the image stays centered on cursor but clipped by container
+                transform: "translate(-50%, -50%)", 
               }}
             />
           ))}
         </AnimatePresence>
       </div>
 
-      {/* --- Background Abstract Elements (Simulation) --- */}
-
-      {/* You would replace these divs with actual 3D rendered images using next/image if you have them */}
+      {/* --- Background Abstract Elements --- */}
       <div className="absolute inset-0 pointer-events-none select-none">
-        {/* Left dark block simulation */}
         <div className="absolute -left-[15%] bottom-[-20%] w-[50%] h-[120%] bg-gradient-to-tr from-primary via-dark-black to-primary -rotate-12 opacity-90 blur-sm z-0"></div>
-        {/* Right dark block simulation */}
         <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-sm z-0"></div>
       </div>
 
@@ -116,7 +120,6 @@ const Hero = () => {
 
       {/* --- 4. Bottom Status Bar --- */}
       <div className="absolute bottom-0 left-0 w-full z-30 px-6 py-8 flex justify-between items-end text-gray-500 text-[10px] md:text-xs font-bold tracking-widest uppercase">
-        {/* Social Icons with Sliding 3D Logic */}
         <div className="flex items-center gap-4">
           {[
             { id: "ig", icon: <IoLogoInstagram size={22} />, url: "#" },
@@ -133,7 +136,6 @@ const Hero = () => {
                 <motion.div
                   variants={iconSlideVariants}
                   transition={{ duration: 0.4 }}
-                  style={{ transformStyle: "preserve-3d" }}
                   className="absolute inset-0 flex items-center justify-center text-white"
                 >
                   {social.icon}
@@ -141,7 +143,6 @@ const Hero = () => {
                 <motion.div
                   variants={iconSlideVariants2}
                   transition={{ duration: 0.4 }}
-                  style={{ transformStyle: "preserve-3d" }}
                   className="absolute inset-0 flex items-center justify-center text-white"
                 >
                   {social.icon}
@@ -150,17 +151,8 @@ const Hero = () => {
             </motion.a>
           ))}
         </div>
-
         <div className="hidden md:block tracking-[0.5em]">VISUAL IDENTITY</div>
-
-        {/* <div className="flex items-center gap-4">
-          <span className="text-white cursor-pointer hover:opacity-50 transition-opacity">
-            Bē
-          </span>
-          <div className="w-6 h-6 border border-gray-600 rounded-full flex items-center justify-center">
-            <div className="w-1 h-1 bg-white rounded-full animate-bounce mt-1"></div>
-          </div>
-        </div> */}
+        <div className="w-12 h-12"></div> {/* Spacer for symmetry */}
       </div>
     </section>
   );

@@ -7,21 +7,25 @@ import TechHealthcare from "./components/pages/home/TechHealthcare.jsx";
 import HeroFour from "./components/pages/home/HeroFour.jsx";
 import HeroFive from "./components/pages/home/HeroFive.jsx";
 import HeroLayout from "./components/pages/home/HeroLayout.jsx";
+import HighTec from "./components/pages/home/HighTec.jsx";
+import AboutSection from "./components/pages/home/AboutSection.jsx";
 
 export default function Home() {
   return (
-    <>
+    <div className="bg-[#f3f3f3]">
       {/* <Header /> */}
       <HeroLayout />
       {/* <HeroFour /> */}
       {/* <Herotwo /> */}
       <ClientScroll />
+      <AboutSection />
+      <HighTec />
       {/* <TechHealthcare /> */}
       {/* <HeroFive />
       <ClientScroll /> */}
       {/* <TechHealthcare /> */}
       {/* <HeroThree />
       <Hero /> */}
-    </>
+    </div>
   );
 }
