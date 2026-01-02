@@ -17,9 +17,9 @@ const ClientScroll = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Section Label - Matches the "ABOUT US" style from your reference */}
           <div className="lg:col-span-3">
-            <h2 className="text-[10px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
-              <span className="text-sm">✱</span> TRUSTED BY
-            </h2>
+            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
+              <span className="text-sm">✱</span> Trusted By
+            </p>
             <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-black/40">
               Strategic Partnerships & Global Clients
             </p>
