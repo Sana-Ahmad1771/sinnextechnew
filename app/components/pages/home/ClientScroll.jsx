@@ -8,46 +8,51 @@ import Client1 from "@/public/images/client1.svg";
 import Client2 from "@/public/images/client2.svg";
 import Client3 from "@/public/images/client3.svg";
 
-const clients = [Client1, Client2, Client3, Client1, Client2, Client3];
+const clients = [Client1, Client2, Client3]; // Simplified the base array
 
 const ClientScroll = () => {
   return (
-    <section className="relative w-full bg-[#f4f4f4] py-20 px-6 md:px-12 lg:px-20">
+    <section className="relative w-full bg-[#f4f4f4] py-12 md:py-20 px-6 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-[1500px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Section Label - Matches the "ABOUT US" style from your reference */}
-          <div className="lg:col-span-3">
-            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10 items-center">
+          
+          {/* Section Label */}
+          <div className="w-full lg:col-span-3 text-center lg:text-left">
+            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center justify-center lg:justify-start gap-2 mb-1">
               <span className="text-sm">✱</span> Trusted By
             </p>
             <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-black/40">
-              Strategic Partnerships & Global Clients
+              Strategic Partnerships <span className="hidden sm:inline">&</span> Global Clients
             </p>
           </div>
 
           {/* Scrolling Logos Container */}
-          <div className="lg:col-span-9 overflow-hidden relative">
-            {/* Gradient Fade Overlays for a high-end look */}
-            <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
+          <div className="w-full lg:col-span-9 overflow-hidden relative">
+            {/* Gradient Fade Overlays */}
+            <div className="absolute inset-y-0 left-0 w-12 md:w-20 bg-gradient-to-r from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute inset-y-0 right-0 w-12 md:w-20 bg-gradient-to-l from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
 
             <motion.div
-              className="flex gap-24 items-center"
-              animate={{ x: ["0%", "-50%"] }} // Adjusted to -50% to match the duplicated array length
-              transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+              className="flex gap-12 md:gap-24 items-center w-max"
+              animate={{ x: ["0%", "-50%"] }} 
+              transition={{ 
+                repeat: Infinity, 
+                duration: 25, // Adjusted for slightly faster feel on mobile
+                ease: "linear" 
+              }}
             >
-              {/* Duplicate logos for seamless scroll */}
-              {[...clients, ...clients].map((Client, idx) => (
+              {/* Duplicate logos multiple times for seamless scroll */}
+              {[...clients, ...clients, ...clients, ...clients].map((Client, idx) => (
                 <div
                   key={idx}
-                  className="shrink-0 flex items-center justify-center grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                  className="shrink-0 flex items-center justify-center grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
                 >
                   <Image
                     src={Client}
-                    alt={`Client ${idx + 1}`}
+                    alt={`Client logo ${idx}`}
                     width={140}
                     height={60}
-                    className="object-contain max-h-8 w-auto"
+                    className="object-contain h-6 md:h-8 lg:h-9 w-auto"
                   />
                 </div>
               ))}

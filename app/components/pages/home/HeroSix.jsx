@@ -11,6 +11,7 @@ const TRAIL_IMAGES = [
   "images/hero-2.jpg",
   "images/hero-4.jpg",
   "images/african.jpg",
+  "images/faq6.avif",
   "images/bag-mn.jpg",
   "images/female-green.jpg",
 ];
@@ -68,9 +69,9 @@ const Hero = () => {
     <section
       ref={sectionRef} // Attach ref here
       onMouseMove={handleMouseMove}
-      className="relative h-screen w-full bg-[#080808] overflow-hidden flex flex-col items-center justify-center cursor-default"
+      className="relative md:h-screen h-[70vh] max-h-[1000px] w-full bg-[#080808] overflow-hidden flex flex-col items-center justify-center cursor-default"
     >
-      {/* --- 1. Image Trail Overlay (Changed from fixed to absolute) --- */}
+      {/* 1. Image Trail Overlay */}
       <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
         <AnimatePresence>
           {images.map((img) => (
@@ -90,7 +91,7 @@ const Hero = () => {
                 left: img.x,
                 top: img.y,
                 // Ensures the image stays centered on cursor but clipped by container
-                transform: "translate(-50%, -50%)", 
+                transform: "translate(-50%, -50%)",
               }}
             />
           ))}
@@ -104,7 +105,7 @@ const Hero = () => {
       </div>
 
       {/* --- 3. Main Typography --- */}
-      <div className="relative z-10 text-center px-4 select-none">
+      <div className="relative z-10 text-center px-4 ">
         <div className="relative inline-block">
           <span className="absolute -top-4 -right-6 md:-top-8 md:-right-10 text-gray-500 text-sm md:text-2xl font-bold">
             ®

@@ -1,4 +1,4 @@
-import Header from "./components/common/Header.jsx";
+
 import ClientScroll from "./components/pages/home/ClientScroll.jsx";
 import HeroLayout from "./components/pages/home/HeroLayout.jsx";
 import HighTec from "./components/pages/home/HighTec.jsx";
@@ -14,7 +14,6 @@ import Footer from "./components/common/Footer.jsx";
 export default function Home() {
   return (
     <div className="bg-[#f3f3f3]">
-      {/* <Header /> */}
       <HeroLayout />
       <ClientScroll />
       <AboutSection />
