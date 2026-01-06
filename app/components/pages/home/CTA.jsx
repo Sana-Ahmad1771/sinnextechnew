@@ -90,7 +90,7 @@ export default function CTA() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full h-screen rounded-4xl bg-[#080808] overflow-hidden flex items-center justify-center font-monosans"
+      className="relative w-full h-screen rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] bg-[#080808] overflow-hidden flex items-center justify-center font-monosans"
     >
       {/* GRID CONTAINER */}
       <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden pointer-events-none">
@@ -155,7 +155,7 @@ export default function CTA() {
       </div>
 
       {/* DECORATIVE SIDES - Hidden on Mobile */}
-      <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-20 opacity-20">
+      <div className="absolute left-6 md:left-10 top-1/2 -translate-y-1/2 hidden xl:flex flex-col  gap-20 opacity-20">
         <span className="rotate-90 text-[10px] text-white tracking-[1em] uppercase whitespace-nowrap">
           Creative
         </span>

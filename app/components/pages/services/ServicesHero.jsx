@@ -1,9 +1,57 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
-import ParallaxSplitText from "./ParallaxSplitText.jsx";
+
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ================================
+    WORD BY WORD PARALLAX COMPONENT
+================================ */
+const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    const words = el.querySelectorAll(".word");
+
+    const tl = gsap.fromTo(
+      words,
+      { yPercent: 120, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        ease: "none",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          end: "top 70%",
+          scrub: 1.2,
+        },
+      }
+    );
+
+    return () => tl.kill();
+  }, []);
+
+  return (
+    <div ref={containerRef} className={`flex flex-wrap leading-[1.05] ${className}`}>
+      {text.split(" ").map((word, i) => (
+        <span key={i} className="relative overflow-hidden inline-block mr-[0.2em]">
+          <span className={`word inline-block will-change-transform ${isGrey ? "text-[#8d8d8d]" : "text-white"}`}>
+            {word}
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const services = [
   {
@@ -73,7 +121,7 @@ const Services = () => {
   };
 
   return (
-    <section className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white py-16 md:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
+    <section className="bg-[#080808]  rounded-4xl text-white py-16 md:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-[1500px] mx-auto border-t border-white/20">
         {/* --- HEADER SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 md:mb-24 pt-6">

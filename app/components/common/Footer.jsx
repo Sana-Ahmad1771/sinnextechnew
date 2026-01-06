@@ -37,7 +37,7 @@ const Footer = () => {
   return (
     <footer className="w-full font-monosans bg-[#fefefe] overflow-hidden">
       {/* --- 1. WHITE TOP SECTION --- */}
-      <div className="px-6 md:px-12 lg:px-20 pt-16 md:pt-24 pb-12 md:pb-20 bg-white relative">
+      <div className="px-6 md:px-12 lg:px-20 pt-16 md:pt-24 pb-12 md:pb-2 relative">
         {/* Ghost Text Background */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center">
           <span className="text-[18vw] md:text-[15vw] font-black text-black opacity-[0.03] leading-none uppercase tracking-tighter block">
@@ -179,7 +179,7 @@ const Footer = () => {
       </div>
 
       {/* --- 2. BLACK BOTTOM DOCK --- */}
-      <div className="bg-[#080808] rounded-t-[2rem] md:rounded-t-4xl px-6 md:px-12 lg:px-20 py-8 md:py-10 text-white relative z-20">
+      <div className="bg-[#080808] rounded-t-[1.5rem] sm:rounded-t-[2rem] md:rounded-t-[3rem] px-6 md:px-12 lg:px-20 py-8 md:py-10 text-white relative z-20">
         <div className="max-w-[1500px] mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex flex-wrap justify-center md:justify-start gap-x-6 gap-y-3 text-[8px] md:text-[9px] font-bold text-gray-500 uppercase tracking-[0.2em] text-center md:text-left">
             <span className="text-gray-400 w-full md:w-auto mb-1 md:mb-0">

@@ -62,9 +62,9 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
 
 const AllProjectsCards = () => {
   return (
-    <section className="relative py-24 md:py-40 bg-white text-black font-monosans overflow-hidden">
+    <section className="relative py-24 md:py-40 text-black font-monosans overflow-hidden">
       {/* 1. SECTION HEADER */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 mb-20 md:mb-32">
+      <div className="max-w-[1400px] mx-auto border-t border-black/10 px-6 lg:px-12 mb-20 md:mb-32">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-full">
             <p className="text-[10px] md:text-[11px] mb-6 uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
@@ -142,7 +142,7 @@ const AllProjectsCards = () => {
                       index % 2 === 0 ? "lg:order-2" : "lg:order-1"
                     } w-full`}
                   >
-                    <div className="relative aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden bg-[#f4f4f4] rounded-xl transition-all duration-700 shadow-sm group-hover:shadow-2xl">
+                    <div className="relative aspect-[16/10] md:aspect-[16/9] w-full overflow-hidden bg-[#f4f4f4] rounded-3xl transition-all duration-700 shadow-sm group-hover:shadow-2xl">
                       <Image
                         src={proj.img}
                         alt={proj.title}
