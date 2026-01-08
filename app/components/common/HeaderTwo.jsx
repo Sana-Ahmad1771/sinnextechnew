@@ -28,10 +28,10 @@ const Header = ({ variant = "dark" }) => {
   useEffect(() => {
     setMounted(true); // Signal that we are now on the client
     setIsLg(window.innerWidth >= 1024);
-    
+
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleResize = () => setIsLg(window.innerWidth >= 1024);
-    
+
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
     return () => {
@@ -107,7 +107,8 @@ const Header = ({ variant = "dark" }) => {
                   <Image
                     src="/images/logo.png"
                     alt="Logo"
-                    fill
+                    width={200}
+                    height={200}
                     className="object-contain"
                     priority
                   />
@@ -115,7 +116,9 @@ const Header = ({ variant = "dark" }) => {
               </div>
               <span
                 className={`font-bold tracking-widest uppercase text-sm transition-all duration-500 ${textColor} ${
-                  scrolled ? "opacity-0 invisible hidden md:block" : "opacity-100 visible"
+                  scrolled
+                    ? "opacity-0 invisible hidden md:block"
+                    : "opacity-100 visible"
                 }`}
               >
                 SINNEXTech®
@@ -125,7 +128,9 @@ const Header = ({ variant = "dark" }) => {
             {/* Desktop Links */}
             <div
               className={`hidden lg:flex items-center gap-1 p-1 rounded-full border backdrop-blur-sm relative ${
-                isLightMode ? "bg-black/5 border-black/5" : "bg-white/5 border-white/5"
+                isLightMode
+                  ? "bg-black/5 border-black/5"
+                  : "bg-white/5 border-white/5"
               }`}
             >
               <div
@@ -145,8 +150,12 @@ const Header = ({ variant = "dark" }) => {
                     ref={(el) => (linksRef.current[idx] = el)}
                     className={`relative px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-colors duration-500 z-10 ${
                       isActive
-                        ? isLightMode ? "text-white" : "text-black"
-                        : isLightMode ? "text-black/60 hover:text-black" : "text-gray-300 hover:text-white"
+                        ? isLightMode
+                          ? "text-white"
+                          : "text-black"
+                        : isLightMode
+                        ? "text-black/60 hover:text-black"
+                        : "text-gray-300 hover:text-white"
                     }`}
                   >
                     {item.name}
@@ -179,9 +188,27 @@ const Header = ({ variant = "dark" }) => {
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[70]"
             />
             <motion.div
-              initial={{ opacity: 0, scale: 0.5, x: "30%", y: "30%", filter: "blur(10px)" }}
-              animate={{ opacity: 1, scale: 1, x: 0, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.5, x: "30%", y: "30%", filter: "blur(10px)" }}
+              initial={{
+                opacity: 0,
+                scale: 0.5,
+                x: "30%",
+                y: "30%",
+                filter: "blur(10px)",
+              }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                x: 0,
+                y: 0,
+                filter: "blur(0px)",
+              }}
+              exit={{
+                opacity: 0,
+                scale: 0.5,
+                x: "30%",
+                y: "30%",
+                filter: "blur(10px)",
+              }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed bottom-6 right-6 w-[90vw] md:w-[600px] bg-white rounded-[2.5rem] p-10 md:p-16 z-[80] shadow-2xl origin-bottom-right"
             >
@@ -191,7 +218,7 @@ const Header = ({ variant = "dark" }) => {
               >
                 <FiX size={32} />
               </button>
-              
+
               <div className="flex flex-col gap-4 mt-8">
                 {navLinks.map((item) => (
                   <Link
@@ -210,7 +237,11 @@ const Header = ({ variant = "dark" }) => {
                 ))}
               </div>
 
-              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
                 <Link
                   href="/contact"
                   onClick={() => setIsOpen(false)}

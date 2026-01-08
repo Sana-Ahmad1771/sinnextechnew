@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -102,11 +103,13 @@ export default function CTA() {
                 idx === 4 ? "z-20 origin-center" : "z-10"
               }`}
             >
-              <img
-                src={item.src}
-                alt=""
-                className="w-full h-full object-cover grayscale"
-              />
+             <Image
+  src={item.src}
+  width={600}
+  height={600}
+  alt={`Grid Image ${idx + 1}`} // <- Added
+  className="w-full h-full object-cover grayscale"
+/>
               {idx === 4 && (
                 <div className="center-overlay absolute inset-0 bg-black opacity-0" />
               )}

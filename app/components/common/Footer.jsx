@@ -61,7 +61,8 @@ const Footer = () => {
                       <Image
                         src="/images/logo.png"
                         alt="SINNEXTech Logo"
-                        fill
+                        width={200}
+                        height={200}
                         className="object-contain"
                         priority
                       />

@@ -124,8 +124,9 @@ export default function ProjectPage({ params }) {
               <Image
                 src={project.gallery[0]}
                 alt={project.title}
-                fill
-                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
+                width={700}
+                height={700}
+                className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
               />
             </div>
           </div>
@@ -163,8 +164,9 @@ export default function ProjectPage({ params }) {
               ref={centralImageRef}
               src={project.img}
               alt="Main Feature"
-              fill
-              className="object-cover will-change-transform"
+              width={700}
+              height={700}
+              className="object-cover w-full h-full will-change-transform"
               style={{ filter: "grayscale(100%)" }}
             />
           </div>
@@ -208,8 +210,9 @@ export default function ProjectPage({ params }) {
                   <Image
                     src={project.gallery[0]}
                     alt={`Gallery ${idx + 1}`}
-                    fill
-                    className="object-cover"
+                    width={600}
+                    height={600}
+                    className="object-cover w-full h-full"
                   />
                 </div>
               ))}
@@ -219,7 +222,7 @@ export default function ProjectPage({ params }) {
           {/* ACHIEVED GOALS */}
           <div className="mt-20 md:mt-32 pt-12 md:pt-16 border-t border-gray-300">
             <h2 className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">
-              Achieved <span className="opacity-50">  Goals</span>
+              Achieved <span className="opacity-50"> Goals</span>
             </h2>
             <div className=" space-y-10">
               <p className="text-gray-500 text-sm md:text-base leading-relaxed">
@@ -254,8 +257,9 @@ export default function ProjectPage({ params }) {
                   <Image
                     src={project.customerimage}
                     alt="Client"
-                    fill
-                    className="object-cover"
+                    width={600}
+                    height={600}
+                    className="object-cover w-full h-full"
                   />
                 </div>
                 <h4 className="text-xl md:text-2xl font-bold uppercase tracking-tighter">
@@ -273,8 +277,9 @@ export default function ProjectPage({ params }) {
               <Image
                 src={project.gallery[0] || project.img}
                 alt="Feature Detail"
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-1000"
+                width={500}
+                height={500}
+                className="object-cover w-full max-h-[700px] group-hover:scale-110 transition-transform duration-1000"
               />
             </div>
           </div>

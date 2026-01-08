@@ -6,6 +6,7 @@ import { FiArrowUpRight } from "react-icons/fi";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -245,8 +246,10 @@ const Services = () => {
                               transformStyle: "preserve-3d",
                             }}
                           >
-                            <img
+                            <Image
                               src={service.image}
+                              width={600}
+                              height={600}
                               className="rounded-3xl w-full h-full object-cover shadow-2xl brightness-90"
                               alt={service.title}
                             />

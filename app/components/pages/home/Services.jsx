@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import ParallaxSplitText from "./ParallaxSplitText.jsx";
+import Image from "next/image.js";
 
 const services = [
   {
@@ -183,8 +184,10 @@ const Services = () => {
                               transformStyle: "preserve-3d",
                             }}
                           >
-                            <img
+                            <Image
                               src={service.image}
+                              width={600}
+                              height={600}
                               className="rounded-3xl w-full h-full object-cover shadow-2xl brightness-90"
                               alt={service.title}
                             />

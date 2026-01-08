@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,7 +104,8 @@ const FAQSection = () => {
             </div>
             <div className="lg:max-w-sm pb-4">
               <p className="text-base md:text-xl text-black/60 max-w-md font-medium leading-snug">
-                Find answers to the most common questions about our services and process.
+                Find answers to the most common questions about our services and
+                process.
               </p>
             </div>
           </div>
@@ -111,7 +113,6 @@ const FAQSection = () => {
 
         {/* MAIN GRID  */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:items-stretch">
-          
           {/* IMAGE BLOCK - Hidden on small mobile to save vertical space, or kept for visual */}
           <div className="lg:col-span-5 h-full order-2 lg:order-1">
             <motion.div
@@ -119,9 +120,11 @@ const FAQSection = () => {
               whileHover={{ scale: 0.99 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <img
+              <Image
                 src="/images/faq6.avif"
-                alt="FAQ Visual"
+                width={600}
+                height={600}
+                alt="FAQ illustration" // ← added alt text
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
@@ -151,7 +154,9 @@ const FAQSection = () => {
                         </span>
                         <h3
                           className={`text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tighter transition-all duration-500 leading-tight ${
-                            open ? "translate-x-2 md:translate-x-4 text-primary" : "text-black"
+                            open
+                              ? "translate-x-2 md:translate-x-4 text-primary"
+                              : "text-black"
                           }`}
                         >
                           {faq.question}
@@ -164,7 +169,9 @@ const FAQSection = () => {
                             : "border-black/10 text-black group-hover:border-black"
                         }`}
                       >
-                        <span className="text-xl md:text-2xl font-light">＋</span>
+                        <span className="text-xl md:text-2xl font-light">
+                          ＋
+                        </span>
                       </div>
                     </button>
                     <AnimatePresence>
