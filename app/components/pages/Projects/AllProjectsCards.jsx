@@ -62,16 +62,17 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
 
 const AllProjectsCards = () => {
   return (
-    <section className="relative py-24 md:py-40 text-black font-monosans overflow-hidden">
+    <section className="relative py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 text-black font-monosans overflow-hidden">
       {/* 1. SECTION HEADER */}
-      <div className="max-w-[1400px] mx-auto border-t border-black/10 px-6 lg:px-12 mb-20 md:mb-32">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div className="max-w-full">
+      <div className="max-w-[1500px] mx-auto  mb-20 md:mb-32">
+        <div className="flex flex-col md:flex-row md:items-end justify-between border-t border-black/10  gap-6">
+          <div className="max-w-full pt-4 md:pt-6">
             <p className="text-[10px] md:text-[11px] mb-6 uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
               <span className="text-sm">✱</span> Selected Works
             </p>
             {/* GSAP PARALLAX HEADING */}
-            <div className="text-[12vw] md:text-[5.5vw] font-black uppercase tracking-tighter">
+
+            <div className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">
               <ParallaxSplitText text="Defining" />
               <ParallaxSplitText text="The Standard." isGrey={true} />
             </div>
@@ -84,8 +85,8 @@ const AllProjectsCards = () => {
       </div>
 
       {/* 2. PROJECT LIST */}
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12">
-        <div className="flex flex-col gap-32 md:gap-56">
+      <div className="max-w-[1500px] mx-auto">
+        <div className="flex flex-col gap-24 md:gap-46 ">
           {projects.map((proj, index) => (
             <motion.div
               key={proj.slug}

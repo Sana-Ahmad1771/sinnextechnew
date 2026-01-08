@@ -27,7 +27,7 @@ const ResultsSection = () => {
   ];
 
   return (
-    <section className="text-black py-12 lg:py-24 px-6 md:px-12 lg:px-20 font-sans">
+    <section className="text-black py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 font-sans">
       <div className="max-w-[1500px] mx-auto border-t border-black/10 ">
         {/* Top Header Area */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 py-8 mb-12 lg:mb-32">

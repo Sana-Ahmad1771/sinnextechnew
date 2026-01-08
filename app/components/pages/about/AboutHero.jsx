@@ -106,24 +106,29 @@ const AboutHero = () => {
 
       {/* --- 3. Main Typography --- */}
       <div className="relative z-10 text-center px-4 ">
-        <div className="relative inline-block">
-          <span className="absolute -top-4 -right-6 md:-top-6 md:right-24 text-gray-500 text-sm md:text-2xl font-bold">
+        <motion.div
+          initial={{ opacity: 0, y: -30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative inline-block"
+        >
+          <span className="absolute lg:block hidden -top-4 -right-6 md:-top-6 md:right-24 text-gray-500 text-sm md:text-2xl font-bold">
             ®
           </span>
-          <h1 className="text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
+          <h1 className="text-[12vw] lg:text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
             Crafting
           </h1>
-          <h1 className="text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
+          <h1 className="text-[12vw] lg:text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
             The Future
           </h1>
-        </div>
+        </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="mt-10 max-w-3xl mx-auto"
+          className="md:mt-10 mt-5 max-w-3xl mx-auto"
         >
-          <p className="text-gray-400 text-sm md:text-base uppercase tracking-[0.5em] leading-relaxed">
+          <p className="text-gray-400 text-sm md:text-base uppercase md:tracking-[0.5em] tracking-wider leading-relaxed">
             We are a collective of visionaries, engineers, and designers
             dedicated to redefining the digital landscape through SinnexTech.
           </p>

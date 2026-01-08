@@ -87,7 +87,7 @@ const FAQSection = () => {
   const [expanded, setExpanded] = useState(null);
 
   return (
-    <section className="bg-[#f9f9f9] py-16 md:py-32 px-6 md:px-12 lg:px-20 font-monosans overflow-hidden">
+    <section className="bg-[#f9f9f9] py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 font-monosans overflow-hidden">
       <div className="max-w-[1500px] mx-auto text-black">
         {/* --- HEADER --- */}
         <div className="mb-12 md:mb-24 border-t border-black/10 pt-8 md:pt-12">

@@ -4,19 +4,21 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 // Import your client logos
-import Client1 from "@/public/images/client1.svg";
-import Client2 from "@/public/images/client2.svg";
-import Client3 from "@/public/images/client3.svg";
+import Client1 from "../../../../public/images/client1.svg";
+import Client2 from "../../../../public/images/client1.svg";
+import Client3 from "../../../../public/images/client1.svg";
 
 const clients = [Client1, Client2, Client3]; // Simplified the base array
 
 const ClientScroll = () => {
   return (
-    <section className="relative w-full bg-[#f4f4f4] py-12 md:py-20 px-6 md:px-12 lg:px-20 overflow-hidden">
+  
+    <section className="relative w-full bg-[#f4f4f4] py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
+
       <div className="max-w-[1500px] mx-auto">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-10 items-center">
           
-          {/* Section Label */}
+          {/* Section Label: Aligned exactly where the Logo/Brand starts in the header */}
           <div className="w-full lg:col-span-3 text-center lg:text-left">
             <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center justify-center lg:justify-start gap-2 mb-1">
               <span className="text-sm">✱</span> Trusted By
@@ -26,9 +28,9 @@ const ClientScroll = () => {
             </p>
           </div>
 
-          {/* Scrolling Logos Container */}
+          {/* Scrolling Logos Container: Spans the rest of the header's nav width */}
           <div className="w-full lg:col-span-9 overflow-hidden relative">
-            {/* Gradient Fade Overlays */}
+            {/* Gradient Fade Overlays - Subtle enough to not break symmetry */}
             <div className="absolute inset-y-0 left-0 w-12 md:w-20 bg-gradient-to-r from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
             <div className="absolute inset-y-0 right-0 w-12 md:w-20 bg-gradient-to-l from-[#f4f4f4] to-transparent z-10 pointer-events-none"></div>
 
@@ -37,7 +39,7 @@ const ClientScroll = () => {
               animate={{ x: ["0%", "-50%"] }} 
               transition={{ 
                 repeat: Infinity, 
-                duration: 25, // Adjusted for slightly faster feel on mobile
+                duration: 25, 
                 ease: "linear" 
               }}
             >

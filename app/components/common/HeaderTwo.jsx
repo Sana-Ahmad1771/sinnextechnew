@@ -11,15 +11,27 @@ const Header = ({ variant = "dark" }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLg, setIsLg] = useState(false);
+  const [mounted, setMounted] = useState(false); // New state to handle hydration
   const pathname = usePathname();
 
   const pillRef = useRef(null);
   const linksRef = useRef([]);
 
+  const navLinks = [
+    { name: "Home", path: "/", id: "(01)" },
+    { name: "Studio", path: "/about", id: "(02)" },
+    { name: "Projects", path: "/projects", id: "(03)" },
+    { name: "Services", path: "/services", id: "(04)" },
+    { name: "Contact", path: "/contact", id: "(05)" },
+  ];
+
   useEffect(() => {
+    setMounted(true); // Signal that we are now on the client
     setIsLg(window.innerWidth >= 1024);
+    
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleResize = () => setIsLg(window.innerWidth >= 1024);
+    
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
     return () => {
@@ -28,33 +40,17 @@ const Header = ({ variant = "dark" }) => {
     };
   }, []);
 
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Studio", path: "/about" },
-    { name: "Projects", path: "/projects" },
-    { name: "Contact", path: "/contact" },
-  ];
-
-  const menuItems = [
-    { name: "Home", id: "(01)" },
-    { name: "About", id: "(02)" },
-    { name: "Projects", id: "(03)" },
-    { name: "Services", id: "(04)" },
-    { name: "Blog", id: "(05)" },
-  ];
-
-  // GSAP Smooth Navigation Logic
   useLayoutEffect(() => {
+    if (!mounted) return; // Don't run GSAP until mounted
+
     const activeIndex = navLinks.findIndex((link) => link.path === pathname);
     const activeLink = linksRef.current[activeIndex];
     const pill = pillRef.current;
 
     if (activeLink && pill) {
       const { offsetLeft, offsetWidth, offsetHeight, offsetTop } = activeLink;
-
-      // The first time it runs, we jump to the position instantly to avoid the "filling" effect
       const isFirstLoad = !pill.dataset.initialized;
-      
+
       if (isFirstLoad) {
         gsap.set(pill, {
           x: offsetLeft,
@@ -64,24 +60,25 @@ const Header = ({ variant = "dark" }) => {
         });
         pill.dataset.initialized = "true";
       } else {
-        // Subsequent moves are smooth and horizontal
         gsap.to(pill, {
           x: offsetLeft,
           width: offsetWidth,
-          height: offsetHeight, // Matches height immediately
-          top: offsetTop,      // Matches top immediately
+          height: offsetHeight,
+          top: offsetTop,
           duration: 0.6,
-          ease: "expo.out",    // High quality, smooth professional ease
+          ease: "expo.out",
           overwrite: true,
         });
       }
     }
-  }, [pathname, scrolled, isLg]);
+  }, [pathname, scrolled, isLg, mounted]);
 
   const isLightMode = variant === "light" && !scrolled;
   const textColor = isLightMode ? "text-black" : "text-white";
   const borderColor = isLightMode ? "border-black/20" : "border-white/20";
 
+  // Avoid rendering parts that rely on window/client-state until mounted
+  // but keep the structure to prevent layout shift.
   return (
     <>
       <nav
@@ -98,25 +95,44 @@ const Header = ({ variant = "dark" }) => {
               : "bg-transparent border-transparent mt-2"
           }`}
         >
-          <div className="flex items-center justify-between mx-auto max-w-[1400px]">
+          <div className="flex items-center justify-between max-w-[1400px] mx-auto">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <div className={`relative border-2 rounded-sm px-3 py-1 group-hover:bg-primary transition-colors duration-300 ${isLightMode ? "border-black" : "border-white"}`}>
+              <div
+                className={`relative border-2 rounded-sm px-3 py-1 group-hover:bg-primary transition-colors duration-300 ${
+                  isLightMode ? "border-black" : "border-white"
+                }`}
+              >
                 <div className="relative w-8 h-7">
-                  <Image src="/images/logo.png" alt="Logo" fill className="object-contain" priority />
+                  <Image
+                    src="/images/logo.png"
+                    alt="Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                  />
                 </div>
               </div>
-              <span className={`font-bold tracking-widest uppercase text-sm transition-all duration-500 ${textColor} ${scrolled ? "opacity-0 invisible" : "opacity-100 visible"}`}>
+              <span
+                className={`font-bold tracking-widest uppercase text-sm transition-all duration-500 ${textColor} ${
+                  scrolled ? "opacity-0 invisible hidden md:block" : "opacity-100 visible"
+                }`}
+              >
                 SINNEXTech®
               </span>
             </Link>
 
             {/* Desktop Links */}
-            <div className={`hidden lg:flex items-center gap-1 p-1 rounded-full border backdrop-blur-sm relative ${isLightMode ? "bg-black/5 border-black/5" : "bg-white/5 border-white/5"}`}>
-              {/* The GSAP Pill - Strictly Horizontal */}
+            <div
+              className={`hidden lg:flex items-center gap-1 p-1 rounded-full border backdrop-blur-sm relative ${
+                isLightMode ? "bg-black/5 border-black/5" : "bg-white/5 border-white/5"
+              }`}
+            >
               <div
                 ref={pillRef}
-                className={`absolute rounded-full pointer-events-none ${isLightMode ? "bg-black" : "bg-white"}`}
+                className={`absolute rounded-full pointer-events-none ${
+                  isLightMode ? "bg-black" : "bg-white"
+                }`}
                 style={{ willChange: "transform, width" }}
               />
 
@@ -139,9 +155,10 @@ const Header = ({ variant = "dark" }) => {
               })}
             </div>
 
-            {/* Hamburger */}
+            {/* Hamburger - Added suppressHydrationWarning to handle browser injected IDs */}
             <button
               onClick={() => setIsOpen(true)}
+              suppressHydrationWarning
               className={`flex items-center cursor-pointer justify-center w-10 h-10 rounded-full border transition-all duration-300 hover:bg-primary hover:text-white ${borderColor} ${textColor}`}
             >
               <FiMenu className="text-xl" />
@@ -168,30 +185,46 @@ const Header = ({ variant = "dark" }) => {
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
               className="fixed bottom-6 right-6 w-[90vw] md:w-[600px] bg-white rounded-[2.5rem] p-10 md:p-16 z-[80] shadow-2xl origin-bottom-right"
             >
-              <button onClick={() => setIsOpen(false)} className="absolute cursor-pointer top-8 right-8 text-black hover:rotate-90 transition-transform duration-300">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute cursor-pointer top-8 right-8 text-black hover:rotate-90 transition-transform duration-300"
+              >
                 <FiX size={32} />
               </button>
+              
               <div className="flex flex-col gap-4 mt-8">
-                {menuItems.map((item) => (
-                  <Link key={item.name} href={`/${item.name.toLowerCase()}`} onClick={() => setIsOpen(false)} className="group flex items-start gap-4 text-black">
-                    <span className="text-[5.5vw] md:text-[4.5rem] font-black uppercase leading-[0.9] tracking-tighter transition-transform group-hover:translate-x-3 duration-300">
+                {navLinks.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className="group flex items-start gap-4 text-black"
+                  >
+                    <span className="text-[10vw] md:text-[4.5rem] font-black uppercase leading-[0.9] tracking-tighter transition-transform group-hover:translate-x-3 duration-300">
                       {item.name}
                     </span>
-                    <span className="text-[10px] md:text-xs font-bold text-black/30 mt-1">{item.id}</span>
+                    <span className="text-[10px] md:text-xs font-bold text-black/30 mt-1">
+                      {item.id}
+                    </span>
                   </Link>
                 ))}
               </div>
-              <motion.a
-                href="/contact"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-12 w-full bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative"
-              >
-                <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">Get In Touch</span>
-                <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">✦</span>
-                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </motion.a>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+                <Link
+                  href="/contact"
+                  onClick={() => setIsOpen(false)}
+                  className="mt-12 w-full bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative"
+                >
+                  <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">
+                    Get In Touch
+                  </span>
+                  <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
+                    ✦
+                  </span>
+                  <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </Link>
+              </motion.div>
             </motion.div>
           </>
         )}

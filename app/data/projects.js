@@ -40,7 +40,7 @@ export const projects = [
       { label: "Data Accuracy", val: "99.9%" },
     ],
     customer: "Ellie",
-    customerimage: "/images/exper2.png",
+    customerimage: "/images/expert2.png",
     customerreview: "They turned our complex data into a beautiful, functional masterpiece. Our team can now make billion-dollar decisions in seconds, not hours.",
   },
   {

@@ -112,10 +112,10 @@ const CaseStudies = () => {
   };
 
   return (
-    <section className="bg-[#080808] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white py-16 md:py-32 overflow-hidden font-monosans">
+    <section className="bg-[#080808] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 overflow-hidden font-monosans">
       
       {/* HEADER */}
-      <div className="max-w-[1500px] mx-auto mb-10 md:mb-16 px-6 md:px-12">
+      <div className="max-w-[1500px] mx-auto mb-10 md:mb-16">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-8 items-start lg:items-end">
           <div className="lg:col-span-8">
             <p className="text-[9px] md:text-[10px] uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold mb-4 md:mb-6 flex gap-2">

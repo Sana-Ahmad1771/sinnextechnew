@@ -72,8 +72,8 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
 ================================ */
 const StorySection = () => {
   return (
-    <section className="py-24 md:py-40 px-6 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto text-center">
+    <section className="py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
+      <div className="max-w-[1500px] mx-auto text-center">
         {/* Small Tagline */}
         <div className="flex justify-center items-center gap-4 mb-12 opacity-40">
           <span className="text-[10px] font-black uppercase tracking-[0.4em]">

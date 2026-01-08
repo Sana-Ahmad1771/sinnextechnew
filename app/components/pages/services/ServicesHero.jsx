@@ -7,7 +7,6 @@ import { FiArrowUpRight } from "react-icons/fi";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 /* ================================
@@ -41,10 +40,20 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className={`flex flex-wrap leading-[1.05] ${className}`}>
+    <div
+      ref={containerRef}
+      className={`flex flex-wrap leading-[1.05] ${className}`}
+    >
       {text.split(" ").map((word, i) => (
-        <span key={i} className="relative overflow-hidden inline-block mr-[0.2em]">
-          <span className={`word inline-block will-change-transform ${isGrey ? "text-[#8d8d8d]" : "text-white"}`}>
+        <span
+          key={i}
+          className="relative overflow-hidden inline-block mr-[0.2em]"
+        >
+          <span
+            className={`word inline-block will-change-transform ${
+              isGrey ? "text-[#8d8d8d]" : "text-white"
+            }`}
+          >
             {word}
           </span>
         </span>
@@ -87,7 +96,7 @@ const services = [
     title: "Website Development",
     description:
       "Creating responsive, high-performance websites that deliver seamless user experiences while accurately reflecting your brand's identity and objectives.",
-      image: "/images/faq6.avif",
+    image: "/images/faq6.avif",
   },
   {
     id: "07",
@@ -129,19 +138,24 @@ const Services = () => {
             <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-6">
               <span className="text-sm">✱</span> Our Services
             </p>
-            <h2 className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
+            <motion.h2
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter"
+            >
               <ParallaxSplitText text="What We Bring" />
               <div className="opacity-50">
                 <ParallaxSplitText text="To Your Brand" />
               </div>
-            </h2>
+            </motion.h2>
           </div>
 
           <a
             href="/about"
             className="group relative flex items-center gap-3 bg-primary text-white px-8 py-4 md:px-10 md:py-5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
           >
-            <span className="relative z-10">All Services</span>
+            <span className="relative z-10">About Us</span>
             <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
               ✦
             </span>

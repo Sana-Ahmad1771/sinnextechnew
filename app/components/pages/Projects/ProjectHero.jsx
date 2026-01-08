@@ -5,24 +5,22 @@ import { motion } from "framer-motion";
 
 const ProjectHero = () => {
   return (
-    <section className="relative w-full min-h-[80vh] flex flex-col justify-center bg-black font-monosans overflow-hidden pt-20">
+    <section className="relative w-full min-h-[80vh] py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 flex flex-col justify-center bg-black font-monosans overflow-hidden pt-20">
       {/* --- Background Abstract Elements --- */}
       <div className="absolute inset-0 pointer-events-none select-none">
         <div className="absolute -left-[15%] bottom-[-20%] w-[50%] h-[120%] bg-gradient-to-tr from-primary via-dark-black to-primary -rotate-12 opacity-90 blur-sm z-0"></div>
         <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-sm z-0"></div>
       </div>
 
-      {/* --- Alignment Container --- */}
-      {/* Matches Header: max-w-[1400px] mx-auto + px-6 lg:px-12 */}
-      <div className="relative z-10 w-full max-w-[1400px] mx-auto ">
+      <div className="relative z-10 w-full max-w-[1500px] mx-auto ">
         {/* 1. TOP SUB-HEADER */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="flex items-center gap-3 mb-8 md:mb-12"
+          className="flex items-center gap-3 mb-8"
         >
-          <div className="lg:col-span-4 px-3 pt-4 md:pt-6">
+          <div className="lg:col-span-4 mx-auto md:mx-0 px-3">
             <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2">
               <span className="text-sm">✱</span> Portfolio
             </p>
@@ -30,12 +28,12 @@ const ProjectHero = () => {
         </motion.div>
 
         {/* 2. MAIN TYPOGRAPHY & CTA */}
-        <div className="flex flex-col items-start lg:flex-row lg:items-end justify-between gap-10">
+        <div className="flex flex-col items-center md:items-start md:flex-row lg:items-end text-center sm:text-left justify-between gap-10">
           <motion.h1
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-[18vw] md:text-[7vw] lg:text-[8vw] leading-[0.85] font-black uppercase tracking-tighter"
+            className="text-[14vw] md:text-[10vw] lg:text-[8vw] leading-[0.85] font-black uppercase tracking-tighter"
           >
             <span className="block text-white">Creative</span>
             <span className="block text-white opacity-40">Showcase</span>

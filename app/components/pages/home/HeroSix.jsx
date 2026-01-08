@@ -69,91 +69,97 @@ const Hero = () => {
     <section
       ref={sectionRef} // Attach ref here
       onMouseMove={handleMouseMove}
+      onTouchMove={(e) => handleMouseMove(e.touches[0])}
       className="relative md:h-screen h-[70vh] max-h-[1000px] w-full bg-[#080808] overflow-hidden flex flex-col items-center justify-center cursor-default"
     >
-      {/* 1. Image Trail Overlay */}
-      <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
-        <AnimatePresence>
-          {images.map((img) => (
-            <motion.img
-              key={img.id}
-              src={img.url}
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                rotate: Math.random() * 20 - 10,
-              }}
-              exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
-              className="absolute w-48 h-64 object-cover rounded-xl shadow-2xl border border-white/10"
-              style={{
-                left: img.x,
-                top: img.y,
-                // Ensures the image stays centered on cursor but clipped by container
-                transform: "translate(-50%, -50%)",
-              }}
-            />
-          ))}
-        </AnimatePresence>
-      </div>
-
-      {/* --- Background Abstract Elements --- */}
-      <div className="absolute inset-0 pointer-events-none select-none">
-        <div className="absolute -left-[15%] bottom-[-20%] w-[50%] h-[120%] bg-gradient-to-tr from-primary via-dark-black to-primary -rotate-12 opacity-90 blur-sm z-0"></div>
-        <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-sm z-0"></div>
-      </div>
-
-      {/* --- 3. Main Typography --- */}
-      <div className="relative z-10 text-center px-4 ">
-        <div className="relative inline-block">
-          <span className="absolute -top-4 -right-6 md:-top-8 md:-right-10 text-gray-500 text-sm md:text-2xl font-bold">
-            ®
-          </span>
-          <h1 className="text-[18vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
-            SINNEX
-          </h1>
+      <div className="max-w-[1600px] mx-auto px-3 sm:px-4 md:px-6 lg:px-16 xl:px-24">
+        {/* 1. Image Trail Overlay */}
+        <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+          <AnimatePresence>
+            {images.map((img) => (
+              // ... inside your images.map
+              <motion.img
+                key={img.id}
+                src={img.url}
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  rotate: Math.random() * 20 - 10,
+                }}
+                exit={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                // RESPONSIVE SIZES: w-32 (small) vs w-48 (large)
+                className="absolute w-32 h-44 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl border border-white/10"
+                style={{
+                  left: img.x,
+                  top: img.y,
+                  transform: "translate(-50%, -50%)",
+                }}
+              />
+            ))}
+          </AnimatePresence>
         </div>
-        <p className="mt-8 text-gray-400 text-sm md:text-lg uppercase tracking-[0.3em] font-medium">
-          Designing Your Digital World
-        </p>
-      </div>
 
-      {/* --- 4. Bottom Status Bar --- */}
-      <div className="absolute bottom-0 left-0 w-full z-30 px-6 py-8 flex justify-between items-end text-gray-500 text-[10px] md:text-xs font-bold tracking-widest uppercase">
-        <div className="flex items-center gap-4">
-          {[
-            { id: "ig", icon: <IoLogoInstagram size={22} />, url: "#" },
-            { id: "li", icon: <RiLinkedinFill size={22} />, url: "#" },
-          ].map((social) => (
-            <motion.a
-              key={social.id}
-              href={social.url}
-              initial="initial"
-              whileHover="hover"
-              className="relative w-12 h-12 overflow-hidden border border-white/10 bg-white/5 rounded-full flex items-center justify-center transition-colors hover:bg-white/20"
-            >
-              <div className="relative h-6 w-6 overflow-hidden">
-                <motion.div
-                  variants={iconSlideVariants}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex items-center justify-center text-white"
-                >
-                  {social.icon}
-                </motion.div>
-                <motion.div
-                  variants={iconSlideVariants2}
-                  transition={{ duration: 0.4 }}
-                  className="absolute inset-0 flex items-center justify-center text-white"
-                >
-                  {social.icon}
-                </motion.div>
-              </div>
-            </motion.a>
-          ))}
+        {/* --- Background Abstract Elements --- */}
+        <div className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute -left-[15%] bottom-[-20%] w-[50%] h-[120%] bg-gradient-to-tr from-primary via-dark-black to-primary -rotate-12 opacity-90 blur-sm z-0"></div>
+          <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-sm z-0"></div>
         </div>
-        <div className="hidden md:block tracking-[0.5em]">VISUAL IDENTITY</div>
-        <div className="w-12 h-12"></div> {/* Spacer for symmetry */}
+
+        {/* --- 3. Main Typography --- */}
+        <div className="relative z-10 text-center px-4 ">
+          <div className="relative inline-block">
+            <span className="absolute -top-4 -right-6 md:-top-8 md:-right-10 text-gray-500 text-sm md:text-2xl font-bold">
+              ®
+            </span>
+            <h1 className="text-[18vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
+              SINNEX
+            </h1>
+          </div>
+          <p className="mt-8 text-gray-400 text-sm md:text-lg uppercase tracking-[0.3em] font-medium">
+            Designing Your Digital World
+          </p>
+        </div>
+
+        {/* --- 4. Bottom Status Bar --- */}
+        <div className="absolute bottom-0 left-0 w-full z-30 px-6 py-8 flex justify-between items-end text-gray-500 text-[10px] md:text-xs font-bold tracking-widest uppercase">
+          <div className="flex items-center gap-4">
+            {[
+              { id: "ig", icon: <IoLogoInstagram size={22} />, url: "#" },
+              { id: "li", icon: <RiLinkedinFill size={22} />, url: "#" },
+            ].map((social) => (
+              <motion.a
+                key={social.id}
+                href={social.url}
+                initial="initial"
+                whileHover="hover"
+                className="relative w-12 h-12 overflow-hidden border border-white/10 bg-white/5 rounded-full flex items-center justify-center transition-colors hover:bg-white/20"
+              >
+                <div className="relative h-6 w-6 overflow-hidden">
+                  <motion.div
+                    variants={iconSlideVariants}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0 flex items-center justify-center text-white"
+                  >
+                    {social.icon}
+                  </motion.div>
+                  <motion.div
+                    variants={iconSlideVariants2}
+                    transition={{ duration: 0.4 }}
+                    className="absolute inset-0 flex items-center justify-center text-white"
+                  >
+                    {social.icon}
+                  </motion.div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+          <div className="hidden md:block tracking-[0.5em]">
+            VISUAL IDENTITY
+          </div>
+          <div className="w-12 h-12"></div> {/* Spacer for symmetry */}
+        </div>
       </div>
     </section>
   );

@@ -40,8 +40,8 @@ const TechHealthcare = () => {
   };
 
   return (
-    <section className="py-20 xl:mx-10 lg:mx-5 mx-2.5 bg-white overflow-hidden">
-      <div className="xl:max-w-[1440px] xl:mx-auto px-5 lg:px-10 2xl:px-0">
+    <section className="py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 bg-white overflow-hidden">
+      <div className="max-w-[1500px] mx-auto ">
         {/* ===========================
            Header Content
         ============================ */}

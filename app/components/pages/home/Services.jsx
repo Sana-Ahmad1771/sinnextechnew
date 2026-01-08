@@ -73,7 +73,7 @@ const Services = () => {
   };
 
   return (
-    <section className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white py-16 md:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
+    <section className="bg-black rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[3rem] text-white py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 overflow-hidden">
       <div className="max-w-[1500px] mx-auto border-t border-white/20">
         {/* --- HEADER SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 md:mb-24 pt-6">

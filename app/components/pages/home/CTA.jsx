@@ -124,11 +124,11 @@ export default function CTA() {
       </div>
 
       {/* CONTENT */}
-      <div className="final-cta relative z-[100] text-center px-6 opacity-0 translate-y-10 flex flex-col items-center pointer-events-none">
+      <div className="final-cta relative z-[100] py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 text-center opacity-0 translate-y-10 flex flex-col items-center pointer-events-none">
         <p className="text-primary text-[8px] md:text-[10px] uppercase tracking-[0.5em] md:tracking-[0.8em] font-black mb-4 md:mb-6">
           Next Phase
         </p>
-        <h2 className="text-[12vw] md:text-[8.5rem] leading-[0.85] font-black uppercase text-white tracking-tighter mb-12">
+        <h2 className="text-[12vw] lg:text-[8.5rem] leading-[0.85] font-black uppercase text-white tracking-tighter mb-5 md:mb-12">
           Let’s shape <br />
           <span
             className="text-transparent"
