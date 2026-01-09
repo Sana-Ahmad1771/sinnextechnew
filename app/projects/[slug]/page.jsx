@@ -2,11 +2,12 @@
 
 import React, { use, useEffect, useRef } from "react";
 import { projects } from "../../data/projects.js";
-import HeaderTwo from "../../components/common/HeaderTwo.jsx";
+// import HeaderTwo from "../../components/common/HeaderTwo.jsx";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import Footer from "../../components/common/Footer.jsx";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,27 +17,35 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    const el = containerRef.current;
-    const words = el.querySelectorAll(".word");
+    let tl;
+    const ctx = gsap.context(() => {
+      const el = containerRef.current;
+      if (!el || !el.isConnected) return;
+      const words = el.querySelectorAll(".word");
 
-    const tl = gsap.fromTo(
-      words,
-      { yPercent: 120, opacity: 0 },
-      {
-        yPercent: 0,
-        opacity: 1,
-        ease: "none",
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: el,
-          start: "top 95%",
-          end: "top 70%",
-          scrub: 1.2,
-        },
-      }
-    );
+      tl = gsap.fromTo(
+        words,
+        { yPercent: 120, opacity: 0 },
+        {
+          yPercent: 0,
+          opacity: 1,
+          ease: "none",
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 95%",
+            end: "top 70%",
+            scrub: 1.2,
+          },
+        }
+      );
+    }, containerRef);
 
-    return () => tl.kill();
+    return () => {
+      if (tl && tl.scrollTrigger) tl.scrollTrigger.kill();
+      if (tl) tl.kill();
+      ctx.revert();
+    };
   }, []);
 
   return (
@@ -66,20 +75,73 @@ export default function ProjectPage({ params }) {
   const project = projects.find((p) => p.slug === slug);
   const otherProjects = projects.filter((p) => p.slug !== slug).slice(0, 2);
   const centralImageRef = useRef(null);
+  const galleryRefs = useRef([]);
 
   useEffect(() => {
-    if (centralImageRef.current) {
-      gsap.to(centralImageRef.current, {
-        filter: "grayscale(0%)",
-        scale: 1.05,
-        scrollTrigger: {
-          trigger: centralImageRef.current,
-          start: "top 80%",
-          end: "top 20%",
-          scrub: true,
-        },
+    let tween;
+    const ctx = gsap.context(() => {
+      if (centralImageRef.current && centralImageRef.current.isConnected) {
+        tween = gsap.to(centralImageRef.current, {
+          filter: "grayscale(0%)",
+          scale: 1.05,
+          scrollTrigger: {
+            trigger: centralImageRef.current,
+            start: "top 80%",
+            end: "top 20%",
+            scrub: true,
+          },
+        });
+      }
+    }, centralImageRef);
+
+    return () => {
+      if (tween && tween.scrollTrigger) tween.scrollTrigger.kill();
+      if (tween) tween.kill();
+      ctx.revert();
+    };
+  }, [project]);
+
+  useEffect(() => {
+    let tweens = [];
+    const ctx = gsap.context(() => {
+      galleryRefs.current.forEach((el) => {
+        if (el && el.isConnected) {
+          // Animate the actual <img> inside the wrapper since Next/Image inlines the filter there
+          const img = el.querySelector("img");
+          if (!img) return;
+
+          // Ensure starting state
+          gsap.set(img, { filter: "grayscale(70%)", transformOrigin: "center center" });
+
+          const t = gsap.fromTo(
+            img,
+            { filter: "grayscale(70%)", scale: 1 },
+            {
+              filter: "grayscale(0%)",
+              scale: 1.05,
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                end: "top 25%",
+                scrub: true,
+              },
+              ease: "none",
+              overwrite: true,
+            }
+          );
+
+          tweens.push(t);
+        }
       });
-    }
+    }, galleryRefs);
+
+    return () => {
+      tweens.forEach((t) => {
+        if (t && t.scrollTrigger) t.scrollTrigger.kill();
+        if (t) t.kill();
+      });
+      ctx.revert();
+    };
   }, [project]);
 
   if (!project)
@@ -97,7 +159,7 @@ export default function ProjectPage({ params }) {
           <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-[120px] z-0" />
         </div>
 
-        <HeaderTwo variant="dark" />
+        {/* <HeaderTwo variant="dark" /> */}
 
         <section
           className={`relative z-10 py-12 md:py-24 lg:py-32 ${sectionPadding}`}
@@ -120,12 +182,12 @@ export default function ProjectPage({ params }) {
               </p>
             </div>
 
-            <div className="group w-full lg:w-[45%] aspect-[4/3] relative z-10 rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl">
+            <div className="group w-full lg:w-[42%] aspect-[4/3] relative z-10 rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl">
               <Image
                 src={project.gallery[0]}
                 alt={project.title}
-                width={700}
-                height={700}
+                width={600}
+                height={600}
                 className="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 ease-out"
               />
             </div>
@@ -146,7 +208,10 @@ export default function ProjectPage({ params }) {
               { label: "Year", val: project.year },
               { label: "View Link", val: project.title, isLink: true },
             ].map((item, i) => (
-              <div
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
                 key={i}
                 className="bg-white/90 backdrop-blur-md border border-gray-200 rounded-xl px-5 py-4 md:px-6 md:py-5 flex justify-between items-center text-[10px] md:text-xs uppercase font-bold tracking-widest shadow-sm"
               >
@@ -154,7 +219,7 @@ export default function ProjectPage({ params }) {
                 <span className="text-black text-right truncate ml-4">
                   {item.val} {item.isLink && "↗"}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
 
@@ -205,6 +270,7 @@ export default function ProjectPage({ params }) {
               {[0, 0, 0].map((_, idx) => (
                 <div
                   key={idx}
+                  ref={(el) => (galleryRefs.current[idx] = el)}
                   className="aspect-[16/10] relative rounded-2xl md:rounded-[2.5rem] overflow-hidden shadow-xl ring-1 ring-black/5"
                 >
                   <Image
@@ -212,7 +278,8 @@ export default function ProjectPage({ params }) {
                     alt={`Gallery ${idx + 1}`}
                     width={600}
                     height={600}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full will-change-transform"
+                    style={{ filter: "grayscale(80%)", willChange: "transform, filter" }}
                   />
                 </div>
               ))}

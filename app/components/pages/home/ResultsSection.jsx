@@ -1,7 +1,64 @@
 "use client";
 
-import React from "react";
-import ParallaxSplitText from "./ParallaxSplitText.jsx";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ================================
+    WORD BY WORD PARALLAX COMPONENT
+================================ */
+const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    const words = el.querySelectorAll(".word");
+
+    const tl = gsap.fromTo(
+      words,
+      { yPercent: 120, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        ease: "none",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          end: "top 70%",
+          scrub: 1.2,
+        },
+      }
+    );
+
+    return () => tl.kill();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`flex flex-wrap leading-[1.05] ${className}`}
+    >
+      {text.split(" ").map((word, i) => (
+        <span
+          key={i}
+          className="relative overflow-hidden inline-block mr-[0.2em]"
+        >
+          <span
+            className={`word inline-block will-change-transform ${
+              isGrey ? "text-[#8d8d8d]" : "text-black"
+            }`}
+          >
+            {word}
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+};
 
 const ResultsSection = () => {
   const stats = [
@@ -36,7 +93,7 @@ const ResultsSection = () => {
               <span className="text-sm">✱</span> Results
             </p>
             {/* Heading: uses clamp-like text sizing for mobile and fluid scaling */}
-            <h2 className="font-monosansnarrow text-[18vw] sm:text-[14vw] lg:text-[10rem] leading-[0.9] font-black uppercase tracking-tighter">
+            {/* <h2 className="font-monosansnarrow text-[18vw] sm:text-[14vw] lg:text-[10rem] leading-[0.9] font-black uppercase tracking-tighter">
               <ParallaxSplitText
                 className="tracking-wide block"
                 text="Impact"
@@ -45,6 +102,10 @@ const ResultsSection = () => {
                 className="tracking-wide opacity-40 block"
                 text="you can feel"
               />
+            </h2> */}
+             <h2 className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">
+              <ParallaxSplitText text="Impact" className="block" />
+              <ParallaxSplitText text="you can feel" className="opacity-40 block" />
             </h2>
           </div>
 

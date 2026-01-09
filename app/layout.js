@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Providers from "./Providers";
+import ClientErrorLogger from "./components/ClientErrorLogger";
+import Header from "./components/common/HeaderTwo";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +25,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
-        <Providers>{children}</Providers>
+        {/* Client-side logger to capture runtime errors and send them to the dev server */}
+        <Header />
+
+        <ClientErrorLogger />
+        {children}
       </body>
     </html>
   );

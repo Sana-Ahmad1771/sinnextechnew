@@ -11,27 +11,15 @@ const Header = ({ variant = "dark" }) => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isLg, setIsLg] = useState(false);
-  const [mounted, setMounted] = useState(false); // New state to handle hydration
   const pathname = usePathname();
 
   const pillRef = useRef(null);
   const linksRef = useRef([]);
 
-  const navLinks = [
-    { name: "Home", path: "/", id: "(01)" },
-    { name: "Studio", path: "/about", id: "(02)" },
-    { name: "Projects", path: "/projects", id: "(03)" },
-    { name: "Services", path: "/services", id: "(04)" },
-    { name: "Contact", path: "/contact", id: "(05)" },
-  ];
-
   useEffect(() => {
-    setMounted(true); // Signal that we are now on the client
     setIsLg(window.innerWidth >= 1024);
-
     const handleScroll = () => setScrolled(window.scrollY > 50);
     const handleResize = () => setIsLg(window.innerWidth >= 1024);
-
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
     return () => {
@@ -40,15 +28,40 @@ const Header = ({ variant = "dark" }) => {
     };
   }, []);
 
-  useLayoutEffect(() => {
-    if (!mounted) return; // Don't run GSAP until mounted
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Studio", path: "/about" },
+    { name: "Projects", path: "/projects" },
+    { name: "Contact", path: "/contact" },
+  ];
 
+  const menuItems = [
+    { name: "Home", id: "(01)", path: "/" },
+    { name: "About", id: "(02)", path: "/about" },
+    { name: "Projects", id: "(03)", path: "/projects" },
+    { name: "Services", id: "(04)", path: "/services" },
+    { name: "Blog", id: "(05)", path: "/blog" },
+  ];
+
+  // GSAP Smooth Navigation Logic
+  useLayoutEffect(() => {
     const activeIndex = navLinks.findIndex((link) => link.path === pathname);
     const activeLink = linksRef.current[activeIndex];
     const pill = pillRef.current;
 
+    // If there's no exact match (e.g. /projects/[slug]) hide the pill so it doesn't linger
+    if (!activeLink && pill) {
+      gsap.to(pill, { autoAlpha: 0, width: 0, duration: 0.25, overwrite: true });
+      return;
+    }
+
     if (activeLink && pill) {
       const { offsetLeft, offsetWidth, offsetHeight, offsetTop } = activeLink;
+
+      // Ensure the pill is visible when there is an active link
+      gsap.set(pill, { autoAlpha: 1 });
+
+      // The first time it runs, we jump to the position instantly to avoid the "filling" effect
       const isFirstLoad = !pill.dataset.initialized;
 
       if (isFirstLoad) {
@@ -60,25 +73,24 @@ const Header = ({ variant = "dark" }) => {
         });
         pill.dataset.initialized = "true";
       } else {
+        // Subsequent moves are smooth and horizontal
         gsap.to(pill, {
           x: offsetLeft,
           width: offsetWidth,
-          height: offsetHeight,
-          top: offsetTop,
+          height: offsetHeight, // Matches height immediately
+          top: offsetTop, // Matches top immediately
           duration: 0.6,
-          ease: "expo.out",
+          ease: "expo.out", // High quality, smooth professional ease
           overwrite: true,
         });
       }
     }
-  }, [pathname, scrolled, isLg, mounted]);
+  }, [pathname, scrolled, isLg]);
 
   const isLightMode = variant === "light" && !scrolled;
   const textColor = isLightMode ? "text-black" : "text-white";
   const borderColor = isLightMode ? "border-black/20" : "border-white/20";
 
-  // Avoid rendering parts that rely on window/client-state until mounted
-  // but keep the structure to prevent layout shift.
   return (
     <>
       <nav
@@ -95,7 +107,7 @@ const Header = ({ variant = "dark" }) => {
               : "bg-transparent border-transparent mt-2"
           }`}
         >
-          <div className="flex items-center justify-between max-w-[1400px] mx-auto">
+          <div className="flex items-center justify-between mx-auto max-w-[1400px]">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
               <div
@@ -107,8 +119,7 @@ const Header = ({ variant = "dark" }) => {
                   <Image
                     src="/images/logo.png"
                     alt="Logo"
-                    width={200}
-                    height={200}
+                    fill
                     className="object-contain"
                     priority
                   />
@@ -116,9 +127,7 @@ const Header = ({ variant = "dark" }) => {
               </div>
               <span
                 className={`font-bold tracking-widest uppercase text-sm transition-all duration-500 ${textColor} ${
-                  scrolled
-                    ? "opacity-0 invisible hidden md:block"
-                    : "opacity-100 visible"
+                  scrolled ? "opacity-0 invisible" : "opacity-100 visible"
                 }`}
               >
                 SINNEXTech®
@@ -133,12 +142,13 @@ const Header = ({ variant = "dark" }) => {
                   : "bg-white/5 border-white/5"
               }`}
             >
+              {/* The GSAP Pill - Strictly Horizontal */}
               <div
                 ref={pillRef}
                 className={`absolute rounded-full pointer-events-none ${
                   isLightMode ? "bg-black" : "bg-white"
                 }`}
-                style={{ willChange: "transform, width" }}
+                style={{ willChange: "transform, width, opacity", opacity: 0 }}
               />
 
               {navLinks.map((item, idx) => {
@@ -164,10 +174,9 @@ const Header = ({ variant = "dark" }) => {
               })}
             </div>
 
-            {/* Hamburger - Added suppressHydrationWarning to handle browser injected IDs */}
+            {/* Hamburger */}
             <button
               onClick={() => setIsOpen(true)}
-              suppressHydrationWarning
               className={`flex items-center cursor-pointer justify-center w-10 h-10 rounded-full border transition-all duration-300 hover:bg-primary hover:text-white ${borderColor} ${textColor}`}
             >
               <FiMenu className="text-xl" />
@@ -218,16 +227,15 @@ const Header = ({ variant = "dark" }) => {
               >
                 <FiX size={32} />
               </button>
-
               <div className="flex flex-col gap-4 mt-8">
-                {navLinks.map((item) => (
+                {menuItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.path}
                     onClick={() => setIsOpen(false)}
                     className="group flex items-start gap-4 text-black"
                   >
-                    <span className="text-[10vw] md:text-[4.5rem] font-black uppercase leading-[0.9] tracking-tighter transition-transform group-hover:translate-x-3 duration-300">
+                    <span className="text-[5.5vw] md:text-[4.5rem] font-black uppercase leading-[0.9] tracking-tighter transition-transform group-hover:translate-x-3 duration-300">
                       {item.name}
                     </span>
                     <span className="text-[10px] md:text-xs font-bold text-black/30 mt-1">
@@ -236,26 +244,21 @@ const Header = ({ variant = "dark" }) => {
                   </Link>
                 ))}
               </div>
-
-              <motion.div
+              <motion.a
+                href="/contact"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
+                className="mt-12 w-full bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative"
               >
-                <Link
-                  href="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="mt-12 w-full bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative"
-                >
-                  <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">
-                    Get In Touch
-                  </span>
-                  <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
-                    ✦
-                  </span>
-                  <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                </Link>
-              </motion.div>
+                <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">
+                  Get In Touch
+                </span>
+                <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
+                  ✦
+                </span>
+                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+              </motion.a>
             </motion.div>
           </>
         )}

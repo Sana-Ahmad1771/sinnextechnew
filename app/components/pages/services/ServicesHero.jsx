@@ -2,6 +2,9 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const DISABLE_MOTION = true; // toggle globally for debugging
+const MotionAP = DISABLE_MOTION ? ({ children }) => <>{children}</> : AnimatePresence;
 import { FiArrowUpRight } from "react-icons/fi";
 
 import gsap from "gsap";
@@ -195,7 +198,7 @@ const Services = () => {
 
                       {/* Masked Reveal (Desktop Only) */}
                       {!isMobile && (
-                        <AnimatePresence>
+                        <MotionAP>
                           {isActive && (
                             <motion.h2
                               initial={{ opacity: 0 }}
@@ -217,13 +220,13 @@ const Services = () => {
                               {service.title}
                             </motion.h2>
                           )}
-                        </AnimatePresence>
+                        </MotionAP>
                       )}
                     </div>
 
                     {/* 3. Floating Image Card (Desktop Only) */}
                     {!isMobile && (
-                      <AnimatePresence>
+                      <MotionAP>
                         {isActive && (
                           <motion.div
                             className="absolute pointer-events-none hidden md:block"
@@ -255,7 +258,7 @@ const Services = () => {
                             />
                           </motion.div>
                         )}
-                      </AnimatePresence>
+                      </MotionAP>
                     )}
                   </div>
 

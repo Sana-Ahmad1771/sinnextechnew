@@ -2,6 +2,9 @@
 
 import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const DISABLE_MOTION = true;
+const MotionAP = DISABLE_MOTION ? ({ children }) => <>{children}</> : AnimatePresence;
 import { IoLogoInstagram } from "react-icons/io";
 import { RiLinkedinFill } from "react-icons/ri";
 
@@ -75,7 +78,7 @@ const Hero = () => {
       <div className="max-w-[1600px] mx-auto px-3 sm:px-4 md:px-6 lg:px-16 xl:px-24">
         {/* 1. Image Trail Overlay */}
         <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
-          <AnimatePresence>
+          <MotionAP>
             {images.map((img) => (
               // ... inside your images.map
               <motion.img
@@ -98,7 +101,7 @@ const Hero = () => {
                 }}
               />
             ))}
-          </AnimatePresence>
+          </MotionAP>
         </div>
 
         {/* --- Background Abstract Elements --- */}

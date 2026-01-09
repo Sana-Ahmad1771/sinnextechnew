@@ -1,9 +1,71 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
-import ParallaxSplitText from "./ParallaxSplitText.jsx";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const DISABLE_MOTION = true; // debug toggle
+const MotionAP = DISABLE_MOTION
+  ? ({ children }) => <>{children}</>
+  : AnimatePresence;
+
+gsap.registerPlugin(ScrollTrigger);
+
+/* ================================
+    WORD BY WORD PARALLAX COMPONENT
+================================ */
+const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    const words = el.querySelectorAll(".word");
+
+    const tl = gsap.fromTo(
+      words,
+      { yPercent: 120, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        ease: "none",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          end: "top 70%",
+          scrub: 1.2,
+        },
+      }
+    );
+
+    return () => tl.kill();
+  }, []);
+
+  return (
+    <div
+      ref={containerRef}
+      className={`flex flex-wrap leading-[1.05] ${className}`}
+    >
+      {text.split(" ").map((word, i) => (
+        <span
+          key={i}
+          className="relative overflow-hidden inline-block mr-[0.2em]"
+        >
+          <span
+            className={`word inline-block will-change-transform ${
+              isGrey ? "text-[#8d8d8d]" : "text-white"
+            }`}
+          >
+            {word}
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+};
+
 import Image from "next/image.js";
 
 const services = [
@@ -40,7 +102,7 @@ const services = [
     title: "Website Development",
     description:
       "Creating responsive, high-performance websites that deliver seamless user experiences while accurately reflecting your brand's identity and objectives.",
-      image: "/images/faq6.avif",
+    image: "/images/faq6.avif",
   },
   {
     id: "07",
@@ -82,11 +144,12 @@ const Services = () => {
             <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-6">
               <span className="text-sm">✱</span> Our Services
             </p>
-            <h2 className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
-              <ParallaxSplitText text="What We Bring" />
-              <div className="opacity-50">
-                <ParallaxSplitText text="To Your Brand" />
-              </div>
+            <h2 className="text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
+              <ParallaxSplitText text="What We Bring" className="block" />
+              <ParallaxSplitText
+                text="To Your Brand"
+                className="opacity-40 block"
+              />
             </h2>
           </div>
 
@@ -133,7 +196,7 @@ const Services = () => {
 
                       {/* Masked Reveal (Desktop Only) */}
                       {!isMobile && (
-                        <AnimatePresence>
+                        <MotionAP>
                           {isActive && (
                             <motion.h2
                               initial={{ opacity: 0 }}
@@ -155,13 +218,13 @@ const Services = () => {
                               {service.title}
                             </motion.h2>
                           )}
-                        </AnimatePresence>
+                        </MotionAP>
                       )}
                     </div>
 
                     {/* 3. Floating Image Card (Desktop Only) */}
                     {!isMobile && (
-                      <AnimatePresence>
+                      <MotionAP>
                         {isActive && (
                           <motion.div
                             className="absolute pointer-events-none hidden md:block"
@@ -193,7 +256,7 @@ const Services = () => {
                             />
                           </motion.div>
                         )}
-                      </AnimatePresence>
+                      </MotionAP>
                     )}
                   </div>
 

@@ -140,7 +140,7 @@ export default function Timeline() {
         {/* Header Section */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 md:mb-24 lg:mb-32 gap-8 md:gap-10">
           <div className="w-full lg:w-2/3">
-            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-4 md:mb-6">
+            <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-4 md:mb-8">
               <span className="text-white text-sm">✱</span> OUR METHODOLOGY
             </p>
             <h2 className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">

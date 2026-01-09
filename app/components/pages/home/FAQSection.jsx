@@ -4,50 +4,59 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const ParallaxSplitText = ({ text, className = "" }) => {
+/* ================================
+    WORD BY WORD PARALLAX COMPONENT
+================================ */
+const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      const words = containerRef.current.querySelectorAll(".word-inner");
-      gsap.fromTo(
-        words,
-        { yPercent: 100, opacity: 0 },
-        {
-          yPercent: 0,
-          opacity: 1,
-          ease: "power4.out",
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 95%",
-            end: "bottom 70%",
-            scrub: 1.5,
-          },
-        }
-      );
-    }, containerRef);
-    return () => ctx.revert();
+    const el = containerRef.current;
+    const words = el.querySelectorAll(".word");
+
+    const tl = gsap.fromTo(
+      words,
+      { yPercent: 120, opacity: 0 },
+      {
+        yPercent: 0,
+        opacity: 1,
+        ease: "none",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 95%",
+          end: "top 70%",
+          scrub: 1.2,
+        },
+      }
+    );
+
+    return () => tl.kill();
   }, []);
 
   return (
-    <span
+    <div
       ref={containerRef}
-      className={`inline-flex flex-wrap overflow-hidden ${className}`}
+      className={`flex flex-wrap leading-[1.05] ${className}`}
     >
       {text.split(" ").map((word, i) => (
         <span
           key={i}
-          className="relative overflow-hidden inline-flex mr-[0.3em]"
+          className="relative overflow-hidden inline-block mr-[0.2em]"
         >
-          <span className="word-inner inline-block">{word}</span>
+          <span
+            className={`word inline-block will-change-transform ${
+              isGrey ? "text-[#8d8d8d]" : "text-black"
+            }`}
+          >
+            {word}
+          </span>
         </span>
       ))}
-    </span>
+    </div>
   );
 };
 
@@ -88,18 +97,19 @@ const FAQSection = () => {
   const [expanded, setExpanded] = useState(null);
 
   return (
-    <section className="bg-[#f9f9f9] py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 font-monosans overflow-hidden">
+    <section className="bg-[#f9f9f9] py-16 md:py-32 px-6 md:px-12 lg:px-20 font-monosans overflow-hidden">
       <div className="max-w-[1500px] mx-auto text-black">
         {/* --- HEADER --- */}
         <div className="mb-12 md:mb-24 border-t border-black/10 pt-8 md:pt-12">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 md:gap-12">
             <div className="max-w-4xl">
-              <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
+              <p className="text-[10px] md:text-[11px] uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2 mb-4 md:mb-8">
                 <span className="text-sm">✱</span> Support & Inquiries
               </p>
-              <h2 className="font-monosansnarrow mt-6 md:mt-10 text-[18vw] sm:text-[14vw] md:text-[8.5rem] leading-[0.9] md:leading-[0.85] font-black uppercase tracking-wide">
+
+              <h2 className="flex text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
                 <ParallaxSplitText text="Quick" className="block" />
-                <ParallaxSplitText text="Help" className="block opacity-40" />
+                <ParallaxSplitText text="Help" className="opacity-40 block" />
               </h2>
             </div>
             <div className="lg:max-w-sm pb-4">
@@ -120,11 +130,9 @@ const FAQSection = () => {
               whileHover={{ scale: 0.99 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <Image
+              <img
                 src="/images/faq6.avif"
-                width={600}
-                height={600}
-                alt="FAQ illustration" // ← added alt text
+                alt="FAQ Visual"
                 className="w-full h-full object-cover transition-transform duration-[1.5s] group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />

@@ -7,6 +7,9 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
+
+const DISABLE_MOTION = true;
+const MotionAP = DISABLE_MOTION ? ({ children }) => <>{children}</> : AnimatePresence;
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -197,7 +200,7 @@ const HighTec = () => {
         </div>
 
         {/* Video Modal */}
-        <AnimatePresence>
+        <MotionAP>
           {isOpen && (
             <motion.div
               initial={{ opacity: 0 }}
@@ -227,7 +230,7 @@ const HighTec = () => {
               </motion.div>
             </motion.div>
           )}
-        </AnimatePresence>
+        </MotionAP>
       </section>
     </>
   );
