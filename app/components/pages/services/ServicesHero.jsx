@@ -4,7 +4,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const DISABLE_MOTION = true; // toggle globally for debugging
-const MotionAP = DISABLE_MOTION ? ({ children }) => <>{children}</> : AnimatePresence;
+const MotionAP = DISABLE_MOTION
+  ? ({ children }) => <>{children}</>
+  : AnimatePresence;
 import { FiArrowUpRight } from "react-icons/fi";
 
 import gsap from "gsap";
@@ -139,23 +141,38 @@ const Services = () => {
         {/* --- HEADER SECTION --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 md:mb-24 pt-6">
           <div className="max-w-9xl">
-            <p className="text-[10px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-6">
-              <span className="text-sm">✱</span> Our Services
-            </p>
-            <motion.h2
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter"
+            <motion.p
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="text-[10px] uppercase tracking-[0.2em] font-bold text-white flex items-center gap-2 mb-6"
             >
-              <ParallaxSplitText text="What We Bring" />
-              <div className="opacity-50">
-                <ParallaxSplitText text="To Your Brand" />
-              </div>
-            </motion.h2>
+              <span className="text-sm">✱</span> Our Services
+            </motion.p>
+            <h2 className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
+              <motion.span
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="block"
+              >
+                What We Bring
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                className="opacity-50 block"
+              >
+                To Your Brand
+              </motion.span>
+            </h2>
           </div>
 
-          <a
+          <motion.button
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
             href="/about"
             className="group relative flex items-center gap-3 bg-primary text-white px-8 py-4 md:px-10 md:py-5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
           >
@@ -164,7 +181,7 @@ const Services = () => {
               ✦
             </span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-          </a>
+          </motion.button>
         </div>
 
         {/* --- SERVICES LIST --- */}
@@ -198,7 +215,7 @@ const Services = () => {
 
                       {/* Masked Reveal (Desktop Only) */}
                       {!isMobile && (
-                        <MotionAP>
+                        <AnimatePresence>
                           {isActive && (
                             <motion.h2
                               initial={{ opacity: 0 }}
@@ -220,13 +237,13 @@ const Services = () => {
                               {service.title}
                             </motion.h2>
                           )}
-                        </MotionAP>
+                        </AnimatePresence>
                       )}
                     </div>
 
                     {/* 3. Floating Image Card (Desktop Only) */}
                     {!isMobile && (
-                      <MotionAP>
+                      <AnimatePresence>
                         {isActive && (
                           <motion.div
                             className="absolute pointer-events-none hidden md:block"
@@ -249,16 +266,14 @@ const Services = () => {
                               transformStyle: "preserve-3d",
                             }}
                           >
-                            <Image
+                            <img
                               src={service.image}
-                              width={600}
-                              height={600}
                               className="rounded-3xl w-full h-full object-cover shadow-2xl brightness-90"
                               alt={service.title}
                             />
                           </motion.div>
                         )}
-                      </MotionAP>
+                      </AnimatePresence>
                     )}
                   </div>
 

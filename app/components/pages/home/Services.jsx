@@ -196,7 +196,7 @@ const Services = () => {
 
                       {/* Masked Reveal (Desktop Only) */}
                       {!isMobile && (
-                        <MotionAP>
+                        <AnimatePresence>
                           {isActive && (
                             <motion.h2
                               initial={{ opacity: 0 }}
@@ -218,13 +218,13 @@ const Services = () => {
                               {service.title}
                             </motion.h2>
                           )}
-                        </MotionAP>
+                        </AnimatePresence>
                       )}
                     </div>
 
                     {/* 3. Floating Image Card (Desktop Only) */}
                     {!isMobile && (
-                      <MotionAP>
+                      <AnimatePresence>
                         {isActive && (
                           <motion.div
                             className="absolute pointer-events-none hidden md:block"
@@ -247,16 +247,14 @@ const Services = () => {
                               transformStyle: "preserve-3d",
                             }}
                           >
-                            <Image
+                            <img
                               src={service.image}
-                              width={600}
-                              height={600}
                               className="rounded-3xl w-full h-full object-cover shadow-2xl brightness-90"
                               alt={service.title}
                             />
                           </motion.div>
                         )}
-                      </MotionAP>
+                      </AnimatePresence>
                     )}
                   </div>
 
