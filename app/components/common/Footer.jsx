@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { IoLogoInstagram, IoLogoTwitter } from "react-icons/io";
 import { RiLinkedinFill, RiFacebookFill } from "react-icons/ri";
+import { FiArrowUp } from "react-icons/fi";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -208,13 +209,13 @@ const Footer = () => {
             </div>
             <button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="group flex items-center gap-3 bg-white/5 hover:bg-white text-white hover:text-black border border-white/10 px-5 py-2.5 rounded-full transition-all duration-500"
+              className="group cursor-pointer flex items-center gap-3 bg-white/5 hover:bg-white text-white hover:text-black border border-white/10 px-5 py-2.5 rounded-full transition-all duration-500"
             >
-              <span className="text-[9px] uppercase tracking-widest font-bold">
+              <span className="text-[10px] uppercase tracking-widest font-bold">
                 Top
               </span>
               <span className="text-lg group-hover:-translate-y-1 transition-transform italic">
-                ↑
+                <FiArrowUp />
               </span>
             </button>
           </div>

@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
 gsap.registerPlugin(ScrollTrigger);
 
 /* ================================
@@ -61,30 +60,66 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
 };
 
 const ResultsSection = () => {
+  const sectionRef = useRef(null);
+  const statsRefs = useRef([]);
+
   const stats = [
     {
-      value: "95",
+      value: 95,
       symbol: "%",
       label:
         "Clients continue working with SinnexTech due to reliable delivery, clear communication, and measurable results.",
     },
     {
-      value: "20",
+      value: 20,
       symbol: "+",
       label:
         "Digital solutions successfully delivered across healthcare, SaaS, and enterprise platforms.",
       lowOpacityValue: true,
     },
     {
-      value: "99",
+      value: 99,
       symbol: "%",
       label:
         "Client satisfaction driven by performance-focused development and long-term technical support.",
     },
   ];
 
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      ScrollTrigger.create({
+        trigger: sectionRef.current,
+        start: "top 75%", // Triggers slightly before the section is centered
+        onEnter: () => {
+          statsRefs.current.forEach((el, index) => {
+            if (!el) return;
+
+            const targetValue = stats[index].value;
+            const obj = { val: 0 };
+
+            gsap.to(obj, {
+              val: targetValue,
+              duration: 2.5, // Slightly longer for a premium feel
+              ease: "expo.out", // Smooth, high-end deceleration
+              delay: index * 0.2, // Staggered start for visual interest
+              onUpdate: () => {
+                el.innerText = Math.round(obj.val);
+              },
+            });
+          });
+        },
+        once: true,
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="text-black py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 font-sans">
+    <section
+      ref={sectionRef}
+      className="text-black py-10 md:py-24 lg:py-32 px-4 md:px-12 lg:px-20 font-sans"
+    >
       <div className="max-w-[1500px] mx-auto border-t border-black/10 ">
         {/* Top Header Area */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-10 py-8 mb-12 lg:mb-32">
@@ -92,20 +127,13 @@ const ResultsSection = () => {
             <p className="text-[10px] mb-6 uppercase tracking-[0.2em] font-bold text-black flex items-center gap-2">
               <span className="text-sm">✱</span> Results
             </p>
-            {/* Heading: uses clamp-like text sizing for mobile and fluid scaling */}
-            {/* <h2 className="font-monosansnarrow text-[18vw] sm:text-[14vw] lg:text-[10rem] leading-[0.9] font-black uppercase tracking-tighter">
-              <ParallaxSplitText
-                className="tracking-wide block"
-                text="Impact"
-              />
-              <ParallaxSplitText
-                className="tracking-wide opacity-40 block"
-                text="you can feel"
-              />
-            </h2> */}
-             <h2 className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">
+
+            <h2 className="font-monosansnarrow text-[15vw] lg:text-[8.5rem] leading-[0.9] font-black uppercase tracking-wide">
               <ParallaxSplitText text="Impact" className="block" />
-              <ParallaxSplitText text="you can feel" className="opacity-40 block" />
+              <ParallaxSplitText
+                text="you can feel"
+                className="opacity-40 block"
+              />
             </h2>
           </div>
 
@@ -138,13 +166,13 @@ const ResultsSection = () => {
               } ${index !== 2 ? "pr-12" : ""}`}
             >
               <h3 className="text-8xl font-mononarrowbold md:text-[9rem] font-medium tracking-tighter mb-6 flex items-baseline">
-                {/* Number Styling */}
                 <span
+                  ref={(el) => (statsRefs.current[index] = el)}
                   className={
                     stat.lowOpacityValue ? "opacity-50" : "opacity-100"
                   }
                 >
-                  {stat.value}
+                  0
                 </span>
                 <span
                   className={
