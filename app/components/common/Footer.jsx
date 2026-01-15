@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { IoLogoInstagram, IoLogoTwitter } from "react-icons/io";
 import { RiLinkedinFill, RiFacebookFill } from "react-icons/ri";
 import { FiArrowUp } from "react-icons/fi";
+import Link from "next/link";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -56,7 +57,7 @@ const Footer = () => {
             {/* Column 1: Branding & Socials */}
             <div className="lg:col-span-3 space-y-8">
               <div className="space-y-6">
-                <a href="/" className="flex items-center gap-2 group w-fit">
+                <Link href="/" className="flex items-center gap-2 group w-fit">
                   <div className="relative border-2 border-black rounded-sm px-2 py-1 group-hover:bg-black transition-colors duration-300">
                     <div className="relative w-8 h-7 md:w-10 md:h-9">
                       <Image
@@ -72,7 +73,7 @@ const Footer = () => {
                   <span className="font-bold text-black tracking-widest uppercase text-xs md:text-sm">
                     SINNEXTech®
                   </span>
-                </a>
+                </Link>
 
                 <div className="flex items-center gap-3">
                   {socialLinks.map((social) => (
@@ -135,14 +136,14 @@ const Footer = () => {
                 </span>
                 <div className="flex flex-wrap gap-2 bg-black p-2 md:p-3 rounded-2xl border border-black/5 shadow-xl">
                   {footerLinks.map((link) => (
-                    <a
+                    <Link
                       key={link.name}
                       href={link.href}
                       className="flex-1 min-w-[90px] px-4 py-2 md:py-3 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] text-white hover:text-black hover:bg-white transition-all duration-300 text-center"
                     >
                       {link.name}
-                    </a>
-                  ))}
+                    </Link>
+                  ))} 
                 </div>
               </div>
             </div>
@@ -164,7 +165,7 @@ const Footer = () => {
                   Ready to elevate your <br className="hidden md:block" />{" "}
                   digital presence?
                 </p>
-                <a
+                <Link
                   href="/contact"
                   className="group relative w-full sm:w-auto flex items-center justify-center gap-3 bg-primary text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-[10px] md:text-[13px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
                 >
@@ -173,7 +174,7 @@ const Footer = () => {
                     ✦
                   </span>
                   <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </a>
+                </Link> 
               </div>
             </div>
           </div>

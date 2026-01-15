@@ -5,7 +5,6 @@ import Image from "next/image";
 import { useEffect, useState, useMemo } from "react";
 
 const Preloader = () => {
-  
   const [shouldShow, setShouldShow] = useState(true); // deterministic on server
   const [isMounted, setIsMounted] = useState(false);
 
@@ -165,7 +164,9 @@ const Preloader = () => {
               <span className="text-6xl font-bold text-white font-mono">
                 {Math.floor(progress)}%
               </span>
-              <p className="text-xs text-gray-50">© {new Date().getFullYear()} Sinnex Technologies.</p>
+              <p className="text-xs text-gray-50">
+                © {new Date().getFullYear()} Sinnex Technologies.
+              </p>
             </motion.div>
           </div>
         </motion.div>

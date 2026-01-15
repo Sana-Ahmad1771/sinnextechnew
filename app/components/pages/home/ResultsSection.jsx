@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -143,7 +144,7 @@ const ResultsSection = () => {
               translates into better performance, higher conversions and
               stronger customer relationships.
             </p>
-            <a
+            <Link
               href="/about"
               className="group w-full sm:w-fit relative flex items-center justify-center sm:justify-start gap-3 bg-primary text-white px-10 py-5 rounded-full text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
             >
@@ -152,7 +153,7 @@ const ResultsSection = () => {
                 ✦
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </a>
+            </Link>
           </div>
         </div>
 

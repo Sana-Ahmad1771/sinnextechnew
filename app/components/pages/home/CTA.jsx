@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Image from "next/image";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -141,7 +142,7 @@ export default function CTA() {
           </span>
         </h2>
 
-        <a
+        <Link
           href="/contact"
           className="group relative cursor-pointer inline-flex items-center gap-4 bg-primary text-white px-8 py-4 md:px-12 md:py-6 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-transform active:scale-95"
         >
@@ -150,7 +151,7 @@ export default function CTA() {
             ✦
           </span>
           <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-        </a>
+        </Link>
 
         <p className="text-white/30 pt-6 text-[8px] md:text-[10px] uppercase tracking-[0.3em] font-medium">
           Sinnex Studios — 2026 Edition

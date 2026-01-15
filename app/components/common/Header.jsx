@@ -244,21 +244,22 @@ const Header = ({ variant = "dark" }) => {
                   </Link>
                 ))}
               </div>
-              <motion.a
-                href="/contact"
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="mt-12 w-full bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative"
+                className="mt-12 w-full"
               >
-                <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">
-                  Get In Touch
-                </span>
-                <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
-                  ✦
-                </span>
-                <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </motion.a>
+                <Link href="/contact" className="bg-[#0d0d0d] text-white rounded-full py-6 flex items-center justify-center gap-2 group overflow-hidden relative w-full inline-flex">
+                  <span className="font-bold uppercase tracking-[0.2em] text-[10px] md:text-xs relative z-10">
+                    Get In Touch
+                  </span>
+                  <span className="text-lg relative z-10 group-hover:rotate-45 transition-transform duration-500">
+                    ✦
+                  </span>
+                  <div className="absolute inset-0 bg-primary translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
+                </Link>
+              </motion.div>
             </motion.div>
           </>
         )}

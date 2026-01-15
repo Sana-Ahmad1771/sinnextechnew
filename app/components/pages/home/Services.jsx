@@ -67,6 +67,7 @@ const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
 };
 
 import Image from "next/image.js";
+import Link from "next/link";
 
 const services = [
   {
@@ -153,7 +154,7 @@ const Services = () => {
             </h2>
           </div>
 
-          <a
+          <Link
             href="/about"
             className="group relative flex items-center gap-3 bg-primary text-white px-8 py-4 md:px-10 md:py-5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
           >
@@ -162,7 +163,7 @@ const Services = () => {
               ✦
             </span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-          </a>
+          </Link>
         </div>
 
         {/* --- SERVICES LIST --- */}

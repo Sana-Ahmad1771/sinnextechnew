@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,7 +119,7 @@ const AboutSection = () => {
 
           {/*Buttons Section*/}
           <div className="mt-12 md:mt-16 flex flex-col sm:flex-row items-center sm:items-center gap-6 md:gap-10">
-            <a
+            <Link
               href="/about"
               className="group relative w-full sm:w-auto flex items-center justify-center sm:justify-start gap-3 bg-primary text-white px-8 md:px-10 py-4 md:py-5 rounded-full text-[10px] md:text-[11px] font-bold uppercase tracking-widest overflow-hidden transition-all duration-300"
             >
@@ -127,8 +128,8 @@ const AboutSection = () => {
                 ✦
               </span>
               <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-            </a>
-            <a
+            </Link>
+            <Link
               href="/contact"
               className="group flex items-center gap-2 text-[10px] md:text-[11px] font-bold uppercase tracking-widest text-black border-b-2 border-black pb-1 hover:opacity-60 transition-opacity"
             >
@@ -136,7 +137,7 @@ const AboutSection = () => {
               <span className="text-base transition-transform group-hover:translate-x-1 group-hover:-translate-y-1">
                 ↗
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
