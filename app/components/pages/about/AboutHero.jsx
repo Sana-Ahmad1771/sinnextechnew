@@ -121,9 +121,9 @@ const AboutHero = () => {
           <h1 className="text-[12vw] lg:text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
             Crafting
           </h1>
-          <h1 className="text-[12vw] lg:text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
+          <p className="text-[12vw] lg:text-[10vw] leading-[0.85] font-black uppercase text-white tracking-tighter">
             The Future
-          </h1>
+          </p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}

@@ -149,7 +149,7 @@ const Services = () => {
             >
               <span className="text-sm">✱</span> Our Services
             </motion.p>
-            <h2 className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
+            <h1 className=" text-[14vw] md:text-[8rem] leading-[0.9] font-black uppercase tracking-tighter">
               <motion.span
                 initial={{ opacity: 0, x: -40 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -166,7 +166,7 @@ const Services = () => {
               >
                 To Your Brand
               </motion.span>
-            </h2>
+            </h1>
           </div>
 
           <motion.button

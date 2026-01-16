@@ -51,7 +51,7 @@ export const metadata = {
     canonical: "https://sinnextech.com",
   },
 
-  /* ✅ Open Graph (Facebook, LinkedIn, WhatsApp) */
+  /*  Open Graph (Facebook, LinkedIn, WhatsApp) */
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -62,7 +62,7 @@ export const metadata = {
       "Empowering healthcare through innovative technology, software solutions, and digital transformation services.",
     images: [
       {
-        url: "/og/home.png", // place this image in /public/og/home.png
+        url: "https://sinnextechnew.vercel.app/og/home.png",  // place this image in /public/og/home.png
         width: 1200,
         height: 630,
         alt: "Sinnex Tech - Healthcare Technology Solutions",
