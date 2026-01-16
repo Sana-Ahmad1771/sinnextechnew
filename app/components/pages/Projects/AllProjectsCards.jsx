@@ -117,9 +117,9 @@ const AllProjectsCards = () => {
                     </div>
 
                     <div className="space-y-4">
-                      <h3 className="text-4xl md:text-6xl font-black uppercase tracking-tighter group-hover:translate-x-3 transition-transform duration-500 ease-out">
+                      <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter group-hover:translate-x-3 transition-transform duration-500 ease-out">
                         {proj.title}
-                      </h3>
+                      </h2>
                       <p className="text-sm md:text-base text-black/50 max-w-sm leading-relaxed">
                         Transforming the digital landscape through{" "}
                         {proj.tags?.[0].toLowerCase()} and strategic art

@@ -158,13 +158,13 @@ const ResultsSection = () => {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-y-12 sm:gap-y-16 lg:gap-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-12 text-center sm:gap-y-16 lg:gap-0">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className={`flex flex-col py-5 lg:py-10 ${
-                index !== 0 ? "md:border-l border-black/10 md:pl-12" : ""
-              } ${index !== 2 ? "pr-12" : ""}`}
+              className={`flex flex-col items-center py-5 lg:py-10 ${
+                index !== 0 ? "lg:border-l border-black/10 lg:pl-12" : ""
+              } ${index !== 2 ? "lg:pr-12" : ""}`}
             >
               <h3 className="text-8xl font-mononarrowbold md:text-[9rem] font-medium tracking-tighter mb-6 flex items-baseline">
                 <span
@@ -183,7 +183,7 @@ const ResultsSection = () => {
                   {stat.symbol}
                 </span>
               </h3>
-              <p className="text-sm text-gray-600 max-w-[280px] leading-relaxed">
+              <p className="text-sm text-gray-600 max-w-[280px] leading-relaxed text-center">
                 {stat.label}
               </p>
             </div>

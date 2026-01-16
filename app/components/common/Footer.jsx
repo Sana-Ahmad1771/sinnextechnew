@@ -39,7 +39,7 @@ const Footer = () => {
   return (
     <footer className="w-full font-monosans bg-[#fefefe] overflow-hidden">
       {/* --- 1. WHITE TOP SECTION --- */}
-      <div className="py-10 md:py-18 lg:py-20 px-4 md:px-12 lg:px-20 relative">
+      <div className="py-10 md:py-18 lg:py-20 px-4 md:px-12 lg:px-20 max-w-[1500px] mx-auto relative">
         {/* Ghost Text Background */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center">
           <span className="text-[18vw] md:text-[15vw] font-black text-black opacity-[0.03] leading-none uppercase tracking-tighter block">

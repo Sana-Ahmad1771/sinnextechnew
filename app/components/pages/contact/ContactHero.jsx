@@ -58,7 +58,7 @@ const ContactHero = () => {
   }, []);
 
   return (
-    <main className="relative overflow-hidden rounded-4xl bg-[#080808] text-white py-10 md:py-24 lg:pt-32 px-4 md:px-12 lg:px-20 font-monosans min-h-screen">
+    <main className="relative overflow-hidden rounded-4xl bg-[#080808] text-white py-10 md:py-24 pt-32 px-4 md:px-12 lg:px-20 font-monosans min-h-screen">
       <div className="absolute inset-0 z-10 pointer-events-none select-none">
         <div className="absolute -left-[15%] bottom-[-20%] w-[50%] h-[120%] bg-gradient-to-tr from-primary via-dark-black to-primary -rotate-12 opacity-90 blur-[120px] z-0" />
         <div className="absolute -right-[15%] -top-[30%] w-[60%] h-[130%] bg-gradient-to-bl from-primary via-dark-black to-primary rotate-[15deg] opacity-90 blur-[120px] z-0" />
@@ -105,9 +105,9 @@ const ContactHero = () => {
           <div className="space-y-10">
             <div className="space-y-6">
               <div className=" border-b border-white/5 pb-6">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-3">
+                <h2 className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-3">
                   Email
-                </p>
+                </h2>
                 <a
                   href="mailto:hello@sinnextech.com"
                   className="group text-xl md:text-3xl font-monosansnarrow uppercase font-bold flex items-center justify-between hover:text-primary transition-colors"
@@ -118,9 +118,9 @@ const ContactHero = () => {
               </div>
 
               <div className="group border-b border-white/5 pb-6">
-                <p className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-3">
+                <h2 className="text-[9px] uppercase tracking-[0.3em] text-white/40 mb-3">
                   Software House
-                </p>
+                </h2>
                 <p className="text-xl md:text-3xl font-monosansnarrow uppercase font-bold leading-tight">
                   No. 347 Office, M.Dubia Tower,
                   <br />
@@ -214,7 +214,7 @@ const ContactHero = () => {
       </section>
 
       {/* MAP SECTION */}
-      <section className="relative z-10 w-full h-[50vh] md:h-[70vh] px-6 md:px-12  pt-10 md:pt-20">
+      <section className="relative z-10 w-full h-[50vh] md:h-[70vh] max-w-[1500px] mx-auto pt-10 md:pt-20">
         <div className="w-full h-full rounded-[2rem] md:rounded-[3rem] overflow-hidden border border-white/10 grayscale invert contrast-[1.2] opacity-60 hover:opacity-100 transition-opacity duration-700">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46292.54791963975!2d73.04884158450868!3d33.57170264387163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfeb4062e2adc1%3A0x96151197c48f4f32!2sSafeCare%20Training%20%26%20Services!5e0!3m2!1sen!2s!4v1767612425026!5m2!1sen!2s"
