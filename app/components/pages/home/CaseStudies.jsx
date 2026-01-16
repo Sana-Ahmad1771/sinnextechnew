@@ -9,9 +9,6 @@ import Link from "next/link";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/* ================================
-    WORD BY WORD PARALLAX COMPONENT
-================================ */
 const ParallaxSplitText = ({ text, className = "", isGrey = false }) => {
   const containerRef = useRef(null);
 
@@ -74,7 +71,7 @@ const caseStudies = [
     title: "Bensano",
     slug: "bensano",
     impact: "Top 10 SaaS 2024",
-    img: "/images/faq2.jpg",
+    img: "/images/bensan.jpg",
     tags: ["Product Design", "AI"],
   },
   {

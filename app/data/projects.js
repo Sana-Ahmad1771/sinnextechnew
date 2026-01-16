@@ -88,3 +88,6 @@ export const projects = [
     customerreview: "Establishing trust in cybersecurity is difficult, but they made it look easy. The 'Calm Authority' aesthetic has significantly increased our credibility with healthcare providers.",
   },
 ];
+
+
+
