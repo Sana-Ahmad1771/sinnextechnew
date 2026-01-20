@@ -39,7 +39,7 @@ const Footer = () => {
   return (
     <footer className="w-full font-monosans bg-[#fefefe] overflow-hidden">
       {/* --- 1. WHITE TOP SECTION --- */}
-      <div className="py-10 md:py-18 lg:py-20 px-4 md:px-12 lg:px-20 max-w-[1500px] mx-auto relative">
+      <div className="py-10 md:py-18 lg:py-20 px-4 md:px-12 lg:px-20 relative">
         {/* Ghost Text Background */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none w-full text-center">
           <span className="text-[18vw] md:text-[15vw] font-black text-black opacity-[0.03] leading-none uppercase tracking-tighter block">
@@ -48,11 +48,7 @@ const Footer = () => {
         </div>
 
         <div className="max-w-[1500px] mx-auto relative z-10">
-          {/* Responsive Grid: 
-              - Mobile: 1 column
-              - Tablet (md): 2 columns (Branding left, CTA right, Nav below)
-              - Desktop (lg): 12-column grid
-          */}
+          {/* Responsive Grid: */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 md:gap-y-20 lg:gap-16 items-start">
             {/* Column 1: Branding & Socials */}
             <div className="lg:col-span-3 space-y-8">
@@ -128,7 +124,7 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Column 2: Navigation Pill (Full width on md, Center on lg) */}
+            {/* Column 2:  */}
             <div className="md:col-span-2 lg:col-span-5 flex justify-start lg:justify-center order-3 lg:order-2">
               <div className="flex flex-col gap-6 w-full">
                 <span className="text-gray-400 text-[10px] uppercase tracking-[0.4em] font-black">
@@ -143,12 +139,12 @@ const Footer = () => {
                     >
                       {link.name}
                     </Link>
-                  ))} 
+                  ))}
                 </div>
               </div>
             </div>
 
-            {/* Column 3: CTA Section (Aligned right on md/lg) */}
+            {/* Column 3: */}
             <div className="lg:col-span-4 flex flex-col items-start md:items-end justify-between md:min-h-[220px] lg:min-h-[300px] order-2 lg:order-3">
               <div className="flex items-center gap-2 mb-8 md:mb-0">
                 <span className="text-[10px] font-black uppercase tracking-widest text-gray-400">
@@ -174,7 +170,7 @@ const Footer = () => {
                     ✦
                   </span>
                   <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                </Link> 
+                </Link>
               </div>
             </div>
           </div>
